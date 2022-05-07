@@ -215,4 +215,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# 개인 설정
+my_settings.py
+migrations/
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,python
