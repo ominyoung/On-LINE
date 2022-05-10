@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'route',
+    'rest_framework.authtoken',
+    'rest_auth',
 ]
 
 #Rest_framework에 rest api에 대한 설정
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES' : [
+        'rest_framework.authentication.TokenAuthentication', #Token 인증방식만 씀
         'rest_framework.permissions.IsAdminUser', #admin 사용자만 사용가능하도록 제한
     ],
     'PAGE_SIZE' : 5 #pagination 크기 지정

@@ -15,16 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
 
-from route import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    #REST API
-    path(
-        'api/privacy/',
-        views.PrivacyCreateReadView.as_view(),
-        name='privacy_rest_api'
-    ),
 ]
