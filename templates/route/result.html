@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="btn-group-vertical">
+    <form action="{% url 'route:result' %}" method="post">
+        {% csrf_token %}
+        <!--
+        <input type="hidden" id="sendJSON" name="sendJSON" value="">
+        -->
+        <input type="hidden" id="day" name="day" value="8">
+        <input type="hidden" id="where" name="where" value="1">
+        <button type="submit" class="btn btn-secondary">1</button>
+    </form>
+    <button type="button" class="btn btn-secondary" id="2">2</button>
+    <button type="button" class="btn btn-secondary" id="3">3</button>
+    <button type="button" class="btn btn-secondary" id="4">4</button>
+</div>
+
+<script>
+let jsonTest = {
+                    day: 8,
+                    where: 1
+                };
+let send_data = JSON.stringify(jsonTest)
+$('input[id=sendJSON]').attr('value',send_data);
+
+</script>
+{% endblock %}

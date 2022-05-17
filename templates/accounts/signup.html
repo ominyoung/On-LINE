@@ -11,25 +11,33 @@
                             <h1>Signup</h1>
                         </div>
                     </div>
-                    <form action="#" name="registration">
+                    <form action="{% url 'accounts:create' %}" method="post">
+                        {% csrf_token %}
+                        {{form}}
+                        <!--
                         <div class="form-group">
-                            <label for="exampleInputEmail1">First Name</label>
-                            <input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Enter Firstname">
+                            <label for="username">사용자 이름</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                value="{{ form.username.value|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Last Name</label>
-                            <input type="text" name="lastname" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Enter Lastname">
+                            <label for="password1">비밀번호</label>
+                            <input type="password" class="form-control" name="password1" id="password1"
+                                value="{{ form.password1.value|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <label for="password2">비밀번호 확인</label>
+                            <input type="password" class="form-control" name="password2" id="password2"
+                                value="{{ form.password2.value|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                            <label for="email">이메일</label>
+                            <input type="text" class="form-control" name="email" id="email"
+                                value="{{ form.email.value|default_if_none:'' }}">
                         </div>
-                        <div class="col-md-12 text-center mb-3">
-                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Get Started For Free</button>
+                        -->
+                        <div>
+                            <input type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">회원가입하기</input>
                         </div>
                         <div class="col-md-12 ">
                             <div class="form-group">
