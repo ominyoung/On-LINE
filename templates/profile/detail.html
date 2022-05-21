@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <div style="text-align:center; max-width:500px; margin:4rem auto;">
+        <p>
+            {{ target_user.date_joined }}
+        </p>
+        <h2>
+            {{ target_user.username }}
+        </h2>
+
+        {% if target_user == user %}
+        <a href="{% url 'accounts:update' pk=user.pk %}">
+            <p>
+                회원정보 수정
+            </p>
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

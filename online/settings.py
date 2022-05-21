@@ -156,3 +156,8 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+# profile settings
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
