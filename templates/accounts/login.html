@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load socialaccount %}
 <!-- 로그인 -->
 <div class="container">
     <div class="row">
@@ -30,7 +31,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <p class="text-center">
-                                <a role="button" href="#" class="google btn mybtn"><i class="fa fa-google-plus">
+                                <a role="button" href="{% provider_login_url 'google' %}" class="google btn mybtn"><i class="fa fa-google-plus">
                                     </i> Signup using Google
                                 </a>
                             </p>
