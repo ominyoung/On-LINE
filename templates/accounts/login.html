@@ -15,11 +15,11 @@
                         {% csrf_token %}
                         {% include "accounts/form_errors.html" %}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">ID 아이디</label>
+                            <label for="username">ID 아이디</label>
                             <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Password 비밀번호</label>
+                            <label for="password">Password 비밀번호</label>
                             <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
                         </div>
                         <div class="form-group">

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3>{{ where.name }}</h3>
+<h3>{{ where }}</h3>
 <h6>여행계획 세운날짜</h6>
 <hr>
-<h4> DAY 1 </h4>
+{% for i in days %}
+<h4> DAY <span id="count_html">{{ i|add:"1" }}</span> </h4>
 <h6> 해당 날짜 </h6>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
@@ -12,9 +13,12 @@
   </div>
 
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default">메모 추가</button>
+    <a href="{% url 'route:memo' %}"><button type="button" class="btn btn-default">메모 추가</button></a>
   </div>
 </div>
+
+
+{% endfor %}
 <script>
 
 </script>

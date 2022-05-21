@@ -3,7 +3,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .forms import ResultForm
+from .forms import ResultForm, MemoForm
+from .models import ResultModel
 
 
 def index(request):
@@ -19,10 +20,18 @@ def result(request):
             where = result_renewal_form.cleaned_data.get('where')
     else:
         result_renewal_form = ResultForm()
-    return render(request, 'route/day.html', {'day': day, 'where': where})
+        obj = ResultModel.objects.last()
+        day = obj.day
+        where = obj.where
+    return render(request, 'route/day.html', {'where': where, 'days': range(day)})
 
 
-
-
-
-
+def memo(request):
+    if request.method == 'POST':
+        form = MemoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('route:result')
+    else:
+        form = MemoForm()
+    return render(request, 'route/memo_form.html', {'form': form})
