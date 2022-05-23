@@ -5,7 +5,7 @@
     <div class="mb-4">
         <h4>Profile Create</h4>
     </div>
-    <form action="{% url 'accounts:create' %}" method="post">
+    <form action="{% url 'accounts:profile' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <label for="id_image">Image:</label>

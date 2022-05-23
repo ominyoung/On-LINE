@@ -6,14 +6,34 @@
         <p>
             {{ target_user.date_joined }}
         </p>
-        <h2>
+
+        <img src="{{ target_user.profile.image.url }}" alt=""
+             style="height: 12rem; width: 12rem; border-radius: 10rem; margin-bottom: 2rem;">
+
+        {% if target_user.profile %}
+        <h1>
             {{ target_user.username }}
-        </h2>
+            <a href="{% url 'accounts:profile_update' pk=target_user.profile.pk %}">
+            수정
+            </a>
+        </h1>
+
+        {% else %}
+        <a href="{% url 'accounts:profile' %}">
+            <h2>
+                Create Profile
+            </h2>
+        </a>
+        {% endif %}
+
+        <h4 style="margin-bottom: 2rem;">
+            {{target_user.profile.message}}
+        </h4>
 
         {% if target_user == user %}
         <a href="{% url 'accounts:update' pk=user.pk %}">
             <p>
-                회원정보 수정
+                아이디/비밀번호 수정
             </p>
         </a>
         {% endif %}
