@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <!-- 회원가입 -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+<div class="">
+    <div class="">
+        <div class="mx-auto" style="max-width:450px; margin:4rem auto">
             <div id="second">
                 <div class="myform form ">
                     <div class="logo mb-3">
@@ -36,9 +36,9 @@
                                 value="{{ form.email.value|default_if_none:'' }}">
                         </div>
                         -->
-                        <div>
-                            <input type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">회원가입하기</input>
-                        </div>
+
+                        <input type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">회원가입하기</input>
+
                         <div class="col-md-12 ">
                             <div class="form-group">
                                 <p class="text-center"><a href="#" id="signin">Already have an account?</a></p>

@@ -6,7 +6,7 @@ from django.db import models
 # vue.js 단 결과를 json으로, 나중에 drf로 바꿀 예정
 class ResultModel(models.Model):
     day = models.IntegerField("day")
-    where = models.IntegerField("where", null = True)
+    where = models.CharField(max_length=100)
     #where = models.ForeignKey('whereModel', on_delete=models.CASCADE, null=True)
 
     def __str__(self):

@@ -2,14 +2,14 @@
 {% block content %}
 {% load socialaccount %}
 <!-- 로그인 -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+<div class="">
+    <div class="">
+        <div class="mx-auto" style="width:550px; margin:4rem auto">
             <div id="first">
-                <div class="myform form ">
+                <div class="myform form">
                     <div class="logo mb-3">
                         <div class="col-md-12 text-center">
-                            <h1>Login</h1>
+                            <h1 >Login</h1>
                         </div>
                     </div>
                     <form action="" method="post" name="login" action="{% url 'accounts:login' %}">
@@ -40,7 +40,6 @@
                             <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

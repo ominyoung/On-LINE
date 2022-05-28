@@ -16,8 +16,10 @@ def result(request):
         result_renewal_form = ResultForm(request.POST)
         if result_renewal_form.is_valid():
             result_renewal_form.save()
+            print(result_renewal_form.cleaned_data)
             day = result_renewal_form.cleaned_data.get('day')
             where = result_renewal_form.cleaned_data.get('where')
+            print(day, where)
     else:
         result_renewal_form = ResultForm()
         obj = ResultModel.objects.last()
