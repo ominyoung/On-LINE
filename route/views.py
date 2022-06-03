@@ -37,3 +37,6 @@ def memo(request):
     else:
         form = MemoForm()
     return render(request, 'route/memo_form.html', {'form': form})
+
+def map(request):
+    return render(request, 'route/map.html')
