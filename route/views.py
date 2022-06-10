@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from .forms import ResultForm, MemoForm
-from .models import ResultModel
+from .models import ResultModel, MemoModel
 
 
 def index(request):
@@ -20,12 +20,14 @@ def result(request):
             day = result_renewal_form.cleaned_data.get('day')
             where = result_renewal_form.cleaned_data.get('where')
             print(day, where)
+            memo_list = MemoModel.objects.filter(plan_pk=1)
     else:
         result_renewal_form = ResultForm()
         obj = ResultModel.objects.last()
         day = obj.day
         where = obj.where
-    return render(request, 'route/day.html', {'where': where, 'days': range(day)})
+        memo_list = MemoModel.objects.get(plan_pk=1)
+    return render(request, 'route/day.html', {'where': where, 'days': range(day), 'memo_lists': memo_list})
 
 
 def memo(request):

@@ -7,6 +7,20 @@
 {% for i in days %}
 <h4> DAY <span id="count_html">{{ i|add:"1" }}</span> </h4>
 <h6> 해당 날짜 </h6>
+<table class="table table-hover table-dark">
+  <tbody>
+  {% for j in memo_lists %}
+    {% if i|add:"1" == j.count %}
+      <tr>
+        <th scope="row">{{j.pk}}</th>
+        <td>{{j.content}}</td>
+        <td>{{j.plan_pk.username}}</td>
+        <td>수정|삭제</td>
+      </tr>
+    {% endif %}
+  {% endfor %}
+   </tbody>
+</table>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
     <a href="{% url 'route:map' %}"><button type="button" class="btn btn-default">장소 추가</button></a>
