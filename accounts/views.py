@@ -10,6 +10,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 
 from accounts.forms import ProfileCreationForm
 from accounts.models import Profile
+from route.models import PlanModel
 
 
 def hello_world(request):
@@ -59,3 +60,8 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileCreationForm
     success_url = reverse_lazy('accounts:hello_world')
     template_name = 'profile/info_update.html'
+
+# 개인 일정 모음 페이지
+def personal(request):
+    pers_routes = PlanModel.objects.all()
+    return render(request, 'route/personal_route.html',{'pers_routes': pers_routes})

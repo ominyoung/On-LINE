@@ -6,7 +6,7 @@
 <hr>
 {% for i in days %}
 <h4> DAY <span id="count_html">{{ i|add:"1" }}</span> </h4>
-<h6> 해당 날짜 </h6>
+<!--<h6> 해당 날짜 </h6>-->
 <table class="table table-hover table-dark">
   <tbody>
   {% for j in memo_lists %}
@@ -31,8 +31,13 @@
   </div>
 </div>
 
-
 {% endfor %}
+<div class="modal-footer">
+  <!-- 일시적으로 저장되는 것으로 보여줄 예정, 나중에는 저장버튼을 누르면 planmodel의 pk 생성,
+  해당 아이디로 생성된 메모 데이터를 그 planmodel pk로 전환해서 저장-->
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <a href="{% url 'accounts:hello_world' %}"><button type="submit" class="btn btn-primary">저장</button></a>
+</div>
 <script>
 
 </script>

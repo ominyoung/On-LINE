@@ -25,10 +25,10 @@ class ResultModel(models.Model):
 
 class PlanModel(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    """
     def __str__(self):
         return f'[{self.pk}] :: {self.username}'
-
+    """
 
 class MemoModel(models.Model):
     title = models.CharField(max_length=50)

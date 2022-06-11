@@ -28,7 +28,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'accounts:detail' pk=user.pk %}">마이페이지</a>
-          <a class="dropdown-item" href="#">일정확인하기</a>
+          <a class="dropdown-item" href="{% url 'accounts:personal' %}">일정확인하기</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'accounts:logout' %}">로그아웃</a>
         </div>
