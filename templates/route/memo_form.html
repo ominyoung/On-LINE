@@ -6,17 +6,21 @@
   {% csrf_token %}
   <!--
   {{ form }}
-  <button type="submit" class="btn btn-primary">저장</button>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">저장</button>
+  </div>
   -->
+
   <div class="modal-body">
     <div class="form-group">
-      DAY<input type="text" class="form-control" id="count" class="count">
+      DAY<input type="text" class="form-control" id="count" name="count" class="count">
       <label for="title">제목</label>
-      <input type="text" class="form-control" id="title" class="title">
+      <input type="text" class="form-control" id="title" name="title" class="title">
     </div>
     <div class="form-group">
       <label for="content">내용</label>
-      <textarea class="form-control" id="content" rows="3" class="content"></textarea>
+      <textarea class="form-control" id="content" name="content" rows="3" class="content"></textarea>
     </div>
     <div class="form-group">
       <label>저장 회차</label>
@@ -28,8 +32,7 @@
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary">저장</button>
   </div>
+
 </form>
 
-</body>
-</html>
 {% endblock %}

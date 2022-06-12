@@ -26,7 +26,7 @@ def result(request):
         obj = ResultModel.objects.last()
         day = obj.day
         where = obj.where
-        memo_list = MemoModel.objects.get(plan_pk=1)  # 일정생성 pk=1로 하드코딩
+        memo_list = MemoModel.objects.filter(plan_pk=1)  # 일정생성 pk=1로 하드코딩
     return render(request, 'route/day.html', {'where': where, 'days': range(day), 'memo_lists': memo_list})
 
 
