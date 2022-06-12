@@ -216,7 +216,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # 개인 설정
-migrations/
 my_settings.py
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,python
