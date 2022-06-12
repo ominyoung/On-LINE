@@ -1,19 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $(function () {
+    $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+  });
+  $(function () {
+    $("#datepicker1").datepicker({ dateFormat: "yy-mm-dd" });
+  });
+</script>
+<div class="container">
+    <input autocomplete="off" type="text" id="datepicker" name="formdate" />
+    ~
+    <input autocomplete="off" type="text" id="datepicker1" name="formdate" />
 
-<div class="btn-group-vertical">
-    <form action="{% url 'route:result' %}" method="post">
-        {% csrf_token %}
-        <!--
-        <input type="hidden" id="sendJSON" name="sendJSON" value="">
-        -->
-        <input type="hidden" id="day" name="day" value="8">
-        <input type="hidden" id="where" name="where" value="제주여행">
-        <button type="submit" class="btn btn-secondary">다음</button>
-    </form>
+    <div class="btn-group-vertical">
+        <form action="{% url 'route:result' %}" method="post">
+            {% csrf_token %}
+            <!--
+            <input type="hidden" id="sendJSON" name="sendJSON" value="">
+            -->
+            <input type="hidden" id="day" name="day" value="8">
+            <input type="hidden" id="where" name="where" value="제주여행">
+            <button type="submit" class="btn btn-secondary">다음</button>
+        </form>
+    </div>
 </div>
-
 <script>
 let jsonTest = {
                     day: 8,

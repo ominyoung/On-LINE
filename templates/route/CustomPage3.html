@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--<template backroundColor="black">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div class="container"> 
+        <section id="main">
+            <h1>Q. 원하는 지역이 있나요?</h1>
+            <input type="radio" name="q3" id="q31">
+            <label for="q31">수도권(서울특별시, 인천광역시, 경기도)</label>
+            
+            <input type="radio" name="q3" id="q32">
+            <label for="q32">부산광역시, 울산광역시</label>
+            
+            <input type="radio" name="q3" id="q33">
+            <label for="q33">경상도, 대구광역시</label>
+            
+            <input type="radio" name="q3" id="q34">
+            <label for="q34">전라도, 광주광역시</label>
+            <br>
+            <input type="radio" name="q3" id="q35">
+            <label for="q35">충청도, 대전광역시, 세종특별자치시</label>
+            
+            <input type="radio" name="q3" id="q36">
+            <label for="q36">강원도</label>
+            <input type="radio" name="q3" id="q37" value="">
+            <label for="q37">제주특별자치도</label>                   
+        </section>
+    </div>
+    <div>
+         <a href="{% url 'route:index_result' %}"><button id="CButton">결과찾기</button></a>
+    </div>
+<!--
+</template>
+
+<script> export default {} 
+</script> 
+-->
+<style>
+#main {
+    background-color: whitesmoke;
+    color: rgb(50, 50, 50);
+    width: 80%;
+    text-align: center;
+    border-radius: 20%;
+    margin: auto;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+input[type="radio"] {
+  zoom: 1.3;
+}
+
+label {
+    padding:5px;
+    color:#222;
+    font-family:corbel,sans-serif;
+    font-size: 15px;
+    margin: 10px;
+    vertical-align:top;
+}
+
+#CButton {
+    padding: 5px;
+    margin: 10px;
+    vertical-align: middle;
+    width: auto;
+    position: relative;
+
+    color: #222;
+    background: none;
+    border: solid 1px;
+    border-radius: 2em;
+    font: inherit;
+    font-size: 15px;
+    font-style: bold;
+    padding: 0.75em 2em;
+    cursor: pointer;
+    outline: none;
+  }
+
+
+</style>
+
+{% endblock %}

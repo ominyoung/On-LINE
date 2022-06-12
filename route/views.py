@@ -9,6 +9,17 @@ from .models import ResultModel, MemoModel
 
 def index(request):
     return render(request, 'route/result.html')
+    #return render(request, 'route/CustomPage1.html')
+
+# 맞춤형 페이지
+def first(request):
+    return render(request, 'route/CustomPage1.html')
+def second(request):
+    return render(request, 'route/CustomPage2.html')
+def third(request):
+    return render(request, 'route/CustomPage3.html')
+def index_result(request):
+    return render(request, 'route/CustomResult.html')
 
 
 def result(request):
