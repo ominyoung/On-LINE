@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'accounts',
     'route',
     'rest_api',
-    # vue.js 연동
-    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -80,14 +78,7 @@ TEMPLATES = [
         },
     },
 ]
-# 추가
-WEBPACK_LOADER = {
-    'DEFALUT':{
-        'CACHE': DEBUG,
-        'BUNDLE_DIR_NAME': '/bundles/',
-        'STATS_FILE':os.path.join(BASE_DIR, 'webpack-stats.json'),
-    }
-}
+
 
 WSGI_APPLICATION = 'online.wsgi.application'
 
