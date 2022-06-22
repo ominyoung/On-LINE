@@ -1,6 +1,14 @@
 from django import forms
 
-from route.models import ResultModel, MemoModel
+from route.models import ResultModel, MemoModel, PlanModel
+
+
+class PlanForm(forms.ModelForm):
+    fields = forms.CharField()
+
+    class Meta:
+        model = PlanModel
+        fields = ("username",)
 
 
 class ResultForm(forms.ModelForm):
