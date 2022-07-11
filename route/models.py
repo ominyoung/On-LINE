@@ -16,15 +16,8 @@ class ResultModel(models.Model):
     #    return {'day': self.day, 'where': self.where}
 
 
-#class whereModel(models.Model):
-#    where_id = models.IntegerField("where", primary_key=True)
-#    where_name = models.CharField(max_length=45)
-#
-#    def __str__(self):
-#        return str(self.id)
-
 class PlanModel(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100)
 
     def __str__(self):
         return f'[{self.pk}] :: {self.username}'
@@ -34,10 +27,8 @@ class MemoModel(models.Model):
     title = models.CharField(max_length=50)
     content = models.CharField(max_length=100)
     count = models.IntegerField("count")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    plan_pk = models.ForeignKey(PlanModel, null=True, on_delete=models.SET_NULL)
+    plan_pk = models.ForeignKey(PlanModel, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'[{self.pk}] :: {self.title}'

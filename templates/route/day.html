@@ -12,7 +12,7 @@
   {% for j in memo_lists %}
     {% if i|add:"1" == j.count %}
       <tr>
-        <th scope="row">{{j.pk}}</th>
+        <th scope="row">{{j.title}}</th>
         <td>{{j.content}}</td>
         <td>{{j.plan_pk.username}}</td>
         <td>수정|삭제</td>
@@ -36,7 +36,12 @@
   <!-- 일시적으로 저장되는 것으로 보여줄 예정, 나중에는 저장버튼을 누르면 planmodel의 pk 생성,
   해당 아이디로 생성된 메모 데이터를 그 planmodel pk로 전환해서 저장-->
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  <a href="{% url 'accounts:hello_world' %}"><button type="submit" class="btn btn-primary">저장</button></a>
+  <!--Plan Table에 저장하기 위한 버튼-->
+  <form action="{% url 'route:schedule_save' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" id="username" name="username" value="{{user}}">
+    <button type="submit" class="btn btn-primary">저장</button>
+  </form>
 </div>
 <script>
 

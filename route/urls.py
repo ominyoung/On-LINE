@@ -9,6 +9,7 @@ urlpatterns = [
     path('result/', views.result, name='result'),
     path('memo/', views.memo, name='memo'),
     path('map/', views.map, name='map'),
+    path('schedule_save/', views.schedule_save, name='schedule_save'),
 
 
 

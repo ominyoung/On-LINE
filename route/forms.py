@@ -4,11 +4,11 @@ from route.models import ResultModel, MemoModel, PlanModel
 
 
 class PlanForm(forms.ModelForm):
-    fields = forms.CharField()
+    username = forms.CharField()
 
     class Meta:
         model = PlanModel
-        fields = ("username",)
+        fields = ("username", )
 
 
 class ResultForm(forms.ModelForm):
@@ -21,6 +21,10 @@ class ResultForm(forms.ModelForm):
 
 
 class MemoForm(forms.ModelForm):
+    title = forms.CharField()
+    content = forms.CharField()
+    count = forms.IntegerField()
+
     class Meta:
         model = MemoModel
-        fields = '__all__'
+        fields = ("title", "content", "count")

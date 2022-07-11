@@ -63,5 +63,6 @@ class ProfileUpdateView(UpdateView):
 
 # 개인 일정 모음 페이지
 def personal(request):
-    pers_routes = PlanModel.objects.all()
-    return render(request, 'route/personal_route.html',{'pers_routes': pers_routes})
+    print(f"현재 접속 user: {request.user}")
+    pers_routes = PlanModel.objects.filter(username=request.user)
+    return render(request, 'route/personal_route.html', {'pers_routes': pers_routes})
