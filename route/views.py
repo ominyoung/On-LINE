@@ -1,9 +1,7 @@
-import json
-
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+
 from .forms import ResultForm, MemoForm, PlanForm
 from .models import ResultModel, MemoModel, PlanModel
 
@@ -21,11 +19,6 @@ def third(request):
     return render(request, 'route/CustomPage3.html')
 def index_result(request):
     return render(request, 'route/CustomResult.html')
-
-def cret_plan(request):
-    if request.method == "POST":
-        create_plan_form = PlanForm(request.POST)
-
 
 
 def result(request):
@@ -48,7 +41,7 @@ def result(request):
         # 일정생성할때 새로 만들어지는 메모, plan 테이블에 아직 저장 안됨
     return render(request, 'route/day.html', {'where': where, 'days': range(day), 'memo_lists': memo_list})
 
-
+# 메모 저장
 def memo(request):
     if request.method == 'POST':
         form = MemoForm(request.POST)

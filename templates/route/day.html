@@ -27,7 +27,7 @@
   </div>
 
   <div class="btn-group" role="group">
-    <a href="{% url 'route:memo' %}"><button type="button" class="btn btn-default">메모 추가</button></a>
+    <a href="{% url 'route:memo'%}"><button type="button" id="{{ i|add:'1' }}" class="memoBtn btn btn-default">메모 추가</button></a>
   </div>
 </div>
 
@@ -44,6 +44,13 @@
   </form>
 </div>
 <script>
+  // 메모 추가 버튼을 누를 때 Day 부분이 자동으로 채워지는 코드
+  $('.memoBtn').click(function(){
+   day = $(this).attr("id");
+   window.localStorage.setItem('day',day);
+  });
+
+
 
 </script>
 {% endblock %}

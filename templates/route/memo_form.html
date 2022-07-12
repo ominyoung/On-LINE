@@ -22,11 +22,6 @@
       <label for="content">내용</label>
       <textarea class="form-control" id="content" name="content" rows="3" class="content"></textarea>
     </div>
-    <div class="form-group">
-      <label>저장 회차</label>
-      <br>
-      {{form.plan_pk}}
-    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -34,5 +29,10 @@
   </div>
 
 </form>
+<script>
+  day = window.localStorage.getItem('day');
 
+  document.getElementById('count').value = day
+  document.getElementById('count').disabled = true
+</script>
 {% endblock %}
