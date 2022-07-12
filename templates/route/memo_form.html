@@ -2,7 +2,7 @@
 {% block content %}
 <!-- Modal -->
 
-<form action="" method="post">
+<form action="{% url 'route:memo' %}" method="post">
   {% csrf_token %}
   <!--
   {{ form }}
@@ -33,6 +33,9 @@
   day = window.localStorage.getItem('day');
 
   document.getElementById('count').value = day
-  document.getElementById('count').disabled = true
+  // document.getElementById('count').disable = true 하면 오류나서 수정함
+  // day 값은 보이되 수정은 못하도록 함
+  document.getElementById('count').readOnly = true
 </script>
+
 {% endblock %}

@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>일정 모아보기</h1>
-
-<table class="table table-hover table-dark">
-    <tbody>
-    {% for i in pers_routes %}
-    <tr>
-        <th scope="row">{{i}}</th>
-    </tr>
-    {% endfor %}
-   </tbody>
-</table>
+<div class="container">
+    <br>
+    <h1>일정 모아보기</h1>
+    <br>
+    <table class="table table-hover table-dark">
+        <tbody>
+        {% for i in pers_routes %}
+        <tr>
+            <th scope="row">{{i}}</th>
+            <th class="text-right" scope="row">
+                <button type="button" class="btn btn-primary">자세히보기</button>
+                <button type="button" class="btn btn btn-danger">삭제</button>
+            </th>
+        </tr>
+        {% endfor %}
+       </tbody>
+    </table>
+</div>
 
 {% endblock %}

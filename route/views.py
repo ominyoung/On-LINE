@@ -58,6 +58,7 @@ def map(request):
 
 # 일정페이지에서 close를 누를때 임시저장되었던 메모 삭제
 def schedule_del(request):
+    # 왜 delete 안먹히지?
     MemoModel.objects.filter(plan_pk=None).delete()
     return redirect('accounts:hello_world')
 
