@@ -20,10 +20,8 @@
           <td>{{j.content}}</td>
           <td>{{j.plan_pk.username}}</td>
           <td>
-            <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default">수정</button>
-              <button type="button" class="btn btn-default">삭제</button>
-            </div>
+            <button type="button" class="btn btn-primary">수정</button>
+            <button type="button" class="btn btn btn-danger">삭제</button>
           </td>
         </tr>
       {% endif %}
@@ -45,7 +43,7 @@
 <div class="modal-footer">
   <!-- 일시적으로 저장되는 것으로 보여줄 예정, 나중에는 저장버튼을 누르면 planmodel의 pk 생성,
   해당 아이디로 생성된 메모 데이터를 그 planmodel pk로 전환해서 저장-->
-  <a href="{% url 'route:schedule_save' %}">
+  <a href="{% url 'route:schedule_del' %}">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
   </a>
   <!--Plan Table에 저장하기 위한 버튼-->

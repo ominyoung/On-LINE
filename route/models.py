@@ -29,6 +29,7 @@ class MemoModel(models.Model):
     count = models.IntegerField("count")
 
     plan_pk = models.ForeignKey(PlanModel, null=True, blank=True, on_delete=models.SET_NULL)
+    username = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'[{self.pk}] :: {self.title}'

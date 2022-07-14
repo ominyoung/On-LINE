@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -30,7 +31,7 @@ def result(request):
             day = result_renewal_form.cleaned_data.get('day')
             where = result_renewal_form.cleaned_data.get('where')
             print(day, where)
-            memo_list = MemoModel.objects.filter(plan_pk=None)
+            memo_list = MemoModel.objects.filter(Q(plan_pk=None)&Q(username=request.user))
             # 일정생성할때 새로 만들어지는 메모, plan 테이블에 아직 저장 안됨
     else:
         result_renewal_form = ResultForm()
@@ -46,7 +47,9 @@ def memo(request):
     if request.method == 'POST':
         form = MemoForm(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.username = request.user
+            post.save()
             return redirect('route:result')
     else:
         form = MemoForm()
@@ -58,7 +61,6 @@ def map(request):
 
 # 일정페이지에서 close를 누를때 임시저장되었던 메모 삭제
 def schedule_del(request):
-    # 왜 delete 안먹히지?
     MemoModel.objects.filter(plan_pk=None).delete()
     return redirect('accounts:hello_world')
 
