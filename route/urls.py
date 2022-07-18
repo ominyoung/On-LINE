@@ -11,12 +11,4 @@ urlpatterns = [
     path('map/', views.map, name='map'),
     path('schedule_save/', views.schedule_save, name='schedule_save'),
     path('schedule_del/', views.schedule_del, name="schedule_del"),
-
-
-
-    # 맞춤형 페이지
-    path('first/', views.first, name='first'),
-    path('second/', views.second, name='second'),
-    path('third/', views.third, name='third'),
-    path('index_result/', views.index_result, name='index_result'),
 ]

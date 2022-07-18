@@ -1,3 +1,4 @@
+import requests
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
@@ -8,18 +9,19 @@ from .models import ResultModel, MemoModel, PlanModel
 
 
 def index(request):
-    return render(request, 'route/result.html')
-    #return render(request, 'route/CustomPage1.html')
+    # 기상청 api
+    url = 'http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst'
+    params = {'serviceKey': 'bWG0fEz3JXziaxVbvDmZy9L97AdOHLEF7FrSPGynfDVMsrYAFF5NjMWTgSnhS2I70i7ziWy6QWPMxdQ3eSlLFA==',
+              'pageNo': '1',
+              'numOfRows': '10',
+              'dataType': 'JSON',
+              'regId': '11G00000',
+              'tmFc': '202207181800'}
 
-# 맞춤형 페이지
-def first(request):
-    return render(request, 'route/CustomPage1.html')
-def second(request):
-    return render(request, 'route/CustomPage2.html')
-def third(request):
-    return render(request, 'route/CustomPage3.html')
-def index_result(request):
-    return render(request, 'route/CustomResult.html')
+    response = requests.get(url, params=params)
+    # 3일뒤 오전 날씨
+    print(response.json().get('response').get('body').get('items').get('item')[0].get('wf3Am'))
+    return render(request, 'route/result.html')
 
 
 def result(request):
