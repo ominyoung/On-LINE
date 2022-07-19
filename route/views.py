@@ -1,3 +1,5 @@
+import datetime
+
 import requests
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -9,19 +11,33 @@ from .models import ResultModel, MemoModel, PlanModel
 
 
 def index(request):
+    # 현재 날짜 시간을 0600, 1800만 받아올수 있음 예시) 202207190600
+    dt_now = datetime.datetime.now()
+    if dt_now.hour < 6:
+        dt_aj = datetime.datetime.strftime(dt_now - datetime.timedelta(1), '%Y%m%d')
+        tmFc = str(dt_aj)+"1800"
+    elif 6 <= dt_now.hour < 18:
+        dt_aj = datetime.datetime.strftime(dt_now, '%Y%m%d')
+        tmFc = str(dt_aj)+"0600"
+    else:
+        dt_aj = datetime.datetime.strftime(dt_now, '%Y%m%d')
+        tmFc = str(dt_aj)+"1800"
+    #  + dt_now.day
     # 기상청 api
     url = 'http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst'
     params = {'serviceKey': 'bWG0fEz3JXziaxVbvDmZy9L97AdOHLEF7FrSPGynfDVMsrYAFF5NjMWTgSnhS2I70i7ziWy6QWPMxdQ3eSlLFA==',
               'pageNo': '1',
               'numOfRows': '10',
               'dataType': 'JSON',
-              'regId': '11G00000',
-              'tmFc': '202207181800'}
-
+              'regId': '11G00000', # 제주도
+              'tmFc': tmFc}
+    # tmFc에 현재 날짜 str로 더해서 넣기
     response = requests.get(url, params=params)
     # 3일뒤 오전 날씨
-    print(response.json().get('response').get('body').get('items').get('item')[0].get('wf3Am'))
-    return render(request, 'route/result.html')
+    return render(request, 'route/result.html',
+                  {'time': dt_aj,
+                   'weather': response.json().get('response').get('body').get('items').get('item')[0]
+                   })
 
 
 def result(request):
