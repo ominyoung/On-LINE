@@ -7,10 +7,10 @@
 
 <script>
     $(function () {
-    $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+    $("#startdate").datepicker({ dateFormat: "yy-mm-dd", minDate:0 });
     });
     $(function () {
-    $("#datepicker1").datepicker({ dateFormat: "yy-mm-dd" });
+    $("#enddate").datepicker({ dateFormat: "yy-mm-dd", minDate:0 });
     });
 
     function icon_change(weather){
@@ -85,29 +85,42 @@
     </table>
 
     <br>
-    <input autocomplete="off" type="text" id="datepicker" name="formdate" />
-    ~
-    <input autocomplete="off" type="text" id="datepicker1" name="formdate" />
+
     <!-- 로그인 후 이용해야함 -->
     <div class="btn-group-vertical">
         <form action="{% url 'route:result' %}" method="post">
             {% csrf_token %}
+
+            <input autocomplete="off" type="text" id="startdate" name="startdate" />
+            ~
+            <input autocomplete="off" type="text" id="enddate" name="enddate" />
             <!--
             <input type="hidden" id="sendJSON" name="sendJSON" value="">
             -->
-            <input type="hidden" id="day" name="day" value="8">
+            <input type="hidden" id="day" name="day">
             <input type="hidden" id="where" name="where" value="제주여행">
-            <button type="submit" class="btn btn-secondary">다음</button>
+            <button type="submit" class="btn btn-secondary" id="nxt">다음</button>
         </form>
     </div>
 </div>
 <script>
-let jsonTest = {
-                    day: 8,
-                    where: 1
-                };
-let send_data = JSON.stringify(jsonTest)
-$('input[id=sendJSON]').attr('value',send_data);
+
+
+//$('input[name=day]').attr('value',parseInt(diff/currDay));
+$('#nxt').on('click',function(){
+    var strraw = document.getElementById('startdate').value;
+    var endraw = document.getElementById('enddate').value;
+
+    var arr1 = strraw.split('-');
+    var arr2 = endraw.split('-');
+    var startdate = new Date(arr1[0],arr1[1],arr1[2]);
+    var enddate = new Date(arr2[0],arr2[1],arr2[2]);
+
+    var diff = enddate-startdate
+    var currDay = 24 * 60 * 60 * 1000;
+
+    document.getElementById("day").value = parseInt(diff/currDay) + 1;
+});
 
 </script>
 {% endblock %}

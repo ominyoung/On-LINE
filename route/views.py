@@ -42,23 +42,25 @@ def index(request):
 
 def result(request):
     if request.method == "POST":
-        result_renewal_form = ResultForm(request.POST)
+        startdate = request.POST.get('startdate')
+        enddate = request.POST.get('enddate')
 
-        if result_renewal_form.is_valid():
-            result_renewal_form.save()
-            day = result_renewal_form.cleaned_data.get('day')
-            where = result_renewal_form.cleaned_data.get('where')
-            print(day, where)
-            memo_list = MemoModel.objects.filter(Q(plan_pk=None)&Q(username=request.user))
-            # 일정생성할때 새로 만들어지는 메모, plan 테이블에 아직 저장 안됨
-    else:
-        result_renewal_form = ResultForm()
-        obj = ResultModel.objects.last()
-        day = obj.day
-        where = obj.where
-        memo_list = MemoModel.objects.filter(Q(plan_pk=None)&Q(username=request.user))
-        # 일정생성할때 새로 만들어지는 메모, plan 테이블에 아직 저장 안됨
-    return render(request, 'route/day.html', {'where': where, 'days': range(day), 'memo_lists': memo_list})
+        day = int(request.POST.get('day'))
+        where = request.POST.get('where')
+
+
+        # 일전에 임시로 저장해놓은 메모 불러오기
+        memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
+
+
+    return render(request, 'route/day.html',
+                  {
+                      'startdate': startdate,
+                      'enddate': enddate,
+                      'where': where,
+                      'days': range(day),  # 일정기간
+                      'memo_lists': memo_list
+                  })
 
 # 메모 저장
 def memo(request):
