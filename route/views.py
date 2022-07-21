@@ -48,10 +48,20 @@ def result(request):
         day = int(request.POST.get('day'))
         where = request.POST.get('where')
 
+        # 세션 값 설정하기
+        request.session['startdate'] = startdate
+        request.session['enddate'] = enddate
+        request.session['day'] = day
+        request.session['where'] = where
 
-        # 일전에 임시로 저장해놓은 메모 불러오기
-        memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
+    else:
+        startdate = request.session['startdate']
+        enddate = request.session['enddate']
+        day = request.session['day']
+        where = request.session['where']
 
+    # 일전에 임시로 저장해놓은 메모 불러오기
+    memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
 
     return render(request, 'route/day.html',
                   {
