@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 import requests
 from django.db.models import Q
@@ -12,16 +12,16 @@ from .models import ResultModel, MemoModel, PlanModel
 
 def index(request):
     # 현재 날짜 시간을 0600, 1800만 받아올수 있음 예시) 202207190600
-    dt_now = datetime.datetime.now()
+    dt_now = datetime.now()
     if dt_now.hour < 6:
-        dt_aj = datetime.datetime.strftime(dt_now - datetime.timedelta(1), '%Y%m%d')
-        tmFc = str(dt_aj)+"1800"
+        dt_aj = datetime.strftime(dt_now - datetime.timedelta(1), '%Y-%m-%d')
+        tmFc = str(datetime.strftime(dt_now - datetime.timedelta(1), '%Y%m%d'))+"1800"
     elif 6 <= dt_now.hour < 18:
-        dt_aj = datetime.datetime.strftime(dt_now, '%Y%m%d')
-        tmFc = str(dt_aj)+"0600"
+        dt_aj = datetime.strftime(dt_now, '%Y-%m-%d')
+        tmFc = str(datetime.strftime(dt_now, '%Y%m%d'))+"0600"
     else:
-        dt_aj = datetime.datetime.strftime(dt_now, '%Y%m%d')
-        tmFc = str(dt_aj)+"1800"
+        dt_aj = datetime.strftime(dt_now, '%Y-%m-%d')
+        tmFc = str(datetime.strftime(dt_now, '%Y%m%d'))+"1800"
     #  + dt_now.day
     # 기상청 api
     url = 'http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst'
