@@ -147,3 +147,12 @@ def schedule_save(request):
 
     return redirect('accounts:hello_world')
     #return render(request, 'accounts/main.html')
+
+
+# 맞춤형 페이지
+def custom(request):
+    return render(request, 'route/CustomPage.html')
+
+
+def spot(request):
+    return render(request, 'route/spot.html')

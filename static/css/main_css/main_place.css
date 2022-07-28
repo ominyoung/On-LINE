@@ -1,0 +1,155 @@
+/* Container holding the image and the text */
+.place{
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom:15%;
+}
+body {
+  width: 100%;
+}
+
+.nt-homeunit__ctrl .ctrl-left,
+.nt-homeunit__ctrl .ctrl-rite {
+  color: #fff;
+  background: #000;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 3rem;
+  display: block;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s;
+  z-index: 14;
+}
+.nt-homeunit__ctrl .ctrl-left:hover,
+.nt-homeunit__ctrl .ctrl-rite:hover {
+  opacity: 0.75;
+  transform: scale(1.15);
+}
+.nt-homeunit__ctrl .ctrl-left {
+  margin-top: -1.5rem;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+}
+.nt-homeunit__ctrl .ctrl-rite {
+  margin-top: -1.5rem;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+}
+/*화살표 끝*/
+.nt-homeunit__card {
+  width: 50%;
+  display: none;
+  overflow: hidden;
+  float: left;
+  position: absolute;
+  flex: 1;
+  transition: 0.3s;
+}
+
+@media (min-width: 640px) {
+  .nt-homeunit__card {
+    width: 33.3333333333%;
+  }
+  .nt-homeunit__card.curr {
+    left: 50%;
+    transform: translateX(-50%) scale(1.5);
+    z-index: 10;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.45);
+    position: relative;
+    display: block;
+  }
+  .nt-homeunit__card.init {
+    left: 25%;
+    transform: translateX(-50%);
+    z-index: 8;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+    display: block;
+    opacity: 0;
+  }
+  .nt-homeunit__card.prev {
+    left: 35%;
+    transform: translateX(-50%) scale(1.15);
+    z-index: 9;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+    display: block;
+    opacity: 1;
+  }
+  .nt-homeunit__card.next {
+    left: 65%;
+    transform: translateX(-50%) scale(1.15);
+    z-index: 9;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+    display: block;
+    opacity: 1;
+  }
+  .nt-homeunit__card.last {
+    left: 75%;
+    transform: translateX(-50%);
+    z-index: 8;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+    display: block;
+    opacity: 0;
+  }
+}
+@media (min-width: 992px) {
+  .nt-homeunit__card {
+    width:30%;
+  }
+  .nt-homeunit__card.pre-init {
+    left: 20%;
+    transform: translateX(-50%) scale(0.8);
+    z-index: 7;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    display: block;
+  }
+  .nt-homeunit__card.pos-last {
+    left: 80%;
+    transform: translateX(-50%) scale(0.8);
+    z-index: 7;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    display: block;
+  }
+}
+.nt-homeunit__card figure {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.nt-homeunit__card figure img {
+  width: 150%;
+  margin: auto;
+  position: absolute;
+  top: -1000%;
+  left: -1000%;
+  right: -1000%;
+  bottom: -1000%;
+}
+
+.nt-homeunit__list {
+  width: 100%;
+  padding: 6rem 0;
+  display: block;
+  position: relative;
+}
+.nt-homeunit__list:after {
+  content: "";
+  width: 100%;
+  display: table;
+}
+
+.nt-homeunit {
+  width: 100%;
+  position: relative;
+}

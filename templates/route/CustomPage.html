@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+.base {
+    background-color: #f5f5f5;
+}
+</style>
+<div class ="base">
+<div class="container m_t_2">
+  <h1 class="h1">원하는 여행 스타일을 선택 후 고개님의 맞춤 여행지를 추천받아보세요.</h1>
+  <div class="quiz">
+    <div class="p_1"><progress max="8" value="0"></progress></div>
+    <div class="progressData"><span class="current">0</span> / <span class="limit">0</span></div>
+    <div class="question card">
+      <p class="questionText"></p>
+      <div class="options"></div> <!-- END .options -->
+    </div> <!-- END .question -->
+  </div> <!-- END .quiz -->
+</div> <!-- END .container -->
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script  src="../../static/css/quiz/quiz1.js"></script>
+</div>
+
+{% endblock %}
