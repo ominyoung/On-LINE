@@ -40,7 +40,7 @@ def index(request):
 
     url_short = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
     params_short = {'serviceKey': 'bWG0fEz3JXziaxVbvDmZy9L97AdOHLEF7FrSPGynfDVMsrYAFF5NjMWTgSnhS2I70i7ziWy6QWPMxdQ3eSlLFA==',
-              'pageNo': '1', 'numOfRows': '1000', 'dataType': 'JSON', 'base_date': dt_short_aj, 'base_time': '0500',
+              'pageNo': '1', 'numOfRows': '1000', 'dataType': 'JSON', 'base_date': 20220729, 'base_time': '0500',
               'nx': '53', 'ny': '38'}  # nx, ny : 제주도 일도동,이도동
 
     # tmFc에 현재 날짜 str로 더해서 넣기
@@ -50,9 +50,10 @@ def index(request):
 
     sky = []
     pty = []
-    sky_dict = {}
-    pty_dict = {}
+
     for i in items:
+        sky_dict = {}
+        pty_dict = {}
         if i["category"] == "SKY":
             if i["fcstTime"] == '0600' or i["fcstTime"] == "1200" or i["fcstTime"] == "1800":
                 datestring = datetime.strptime(i["fcstDate"], "%Y%m%d")
@@ -62,8 +63,8 @@ def index(request):
                 sky.append(sky_dict)
         if i["category"] == "PTY":
             if i["fcstTime"] == '0600' or i["fcstTime"] == "1200" or i["fcstTime"] == "1800":
-                pty_dict["fcstDate"] = i["fcstDate"]
-                pty_dict["fcstTime"] = i["fcstTime"]
+                #pty_dict["fcstDate"] = i["fcstDate"]
+                #pty_dict["fcstTime"] = i["fcstTime"]
                 pty_dict["fcstValue"] = i["fcstValue"]
                 pty.append(pty_dict)
 

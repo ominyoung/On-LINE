@@ -47,7 +47,6 @@
         var clone_date = clone.getDate()
         // n일 후의 날짜 clone 변수에 담기
         clone.setDate(clone_date + days)
-        console.log(clone)
 
         var tYear = clone.getFullYear();
         var tMonth = clone.getMonth() + 1;
@@ -57,6 +56,25 @@
 
 </script>
 <div class="container">
+    <br>
+    <div class="btn-group-vertical">
+        <form action="{% url 'route:result' %}" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+                날짜 : <input autocomplete="off" type="text" id="startdate" name="startdate" />
+                ~
+                <input autocomplete="off" type="text" id="enddate" name="enddate" />
+            </div>
+            <!--
+            <input type="hidden" id="sendJSON" name="sendJSON" value="">
+            -->
+            <input type="hidden" id="day" name="day">
+            <input type="hidden" id="where" name="where" value="제주여행">
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" id="nxt">다음</button>
+            </div>
+        </form>
+    </div>
     <br>
     <h6>※ 아래 날씨 정보는 기상청 api를 사용하였습니다.</h6>
     <br>
@@ -149,22 +167,7 @@
 
     <br>
 
-    <!-- 로그인 후 이용해야함 -->
-    <div class="btn-group-vertical">
-        <form action="{% url 'route:result' %}" method="post">
-            {% csrf_token %}
 
-            <input autocomplete="off" type="text" id="startdate" name="startdate" />
-            ~
-            <input autocomplete="off" type="text" id="enddate" name="enddate" />
-            <!--
-            <input type="hidden" id="sendJSON" name="sendJSON" value="">
-            -->
-            <input type="hidden" id="day" name="day">
-            <input type="hidden" id="where" name="where" value="제주여행">
-            <button type="submit" class="btn btn-secondary" id="nxt">다음</button>
-        </form>
-    </div>
 </div>
 <script>
 
@@ -173,6 +176,17 @@
 $('#nxt').on('click',function(){
     var strraw = document.getElementById('startdate').value;
     var endraw = document.getElementById('enddate').value;
+
+    // 첫 번째 datepicker에 값이 없을 때
+    if (strraw == ''){
+        alert('시작 날짜를 선택해주세요!');
+        return false;
+    };
+    // 두 번째 datepicker에 값이 없을 때
+    if (endraw == ''){
+        alert('끝 날짜를 선택해주세요!');
+        return false;
+    }
 
     var arr1 = strraw.split('-');
     var arr2 = endraw.split('-');
