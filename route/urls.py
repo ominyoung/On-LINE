@@ -17,4 +17,5 @@ urlpatterns = [
 
     # 스팟 페이지
     path('spot/', views.spot, name='spot'),
+    path('detail_spot/', views.detail_spot, name='detail_spot'),
 ]

@@ -157,3 +157,7 @@ def custom(request):
 
 def spot(request):
     return render(request, 'route/spot.html')
+
+# 스팟페이지 상세
+def detail_spot(request):
+    return render(request, 'route/detail_spot.html')
