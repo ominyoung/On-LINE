@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <title>목적지 정보</title>
+    <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
     </style>
@@ -234,6 +235,26 @@
       }
       function add() {
         //json 으로 보내는 코드
+        //json 장소 하드코딩
+        var parameters = {
+          "place_name":"스타벅스 제주시청점",
+          "place_address":"제주특별자치도 제주시 특별자치도, 중앙로 215",
+          "latitude":"126.53133413314706",  // 위도
+          "longtitude":"33.49963223009168",  //경도
+        }
+        $.ajax({
+          url:"{% url 'route:result'%}",
+          type:"POST",
+          headers: {
+            'X-CSRFTOKEN' : '{{csrf_token}}'
+          },
+          data: JSON.stringify(parameters),
+          success:function(data){
+            let url = '{% url 'route:result'%}';
+            location.replace(url);
+            console.log(parameters);
+          }
+        });
       }
     </script>
      <script

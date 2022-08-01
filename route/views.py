@@ -1,13 +1,14 @@
 from datetime import datetime
 
 import requests
+import json
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from .forms import ResultForm, MemoForm, PlanForm
-from .models import ResultModel, MemoModel, PlanModel
+from .forms import MemoForm, PlanForm
+from .models import MemoModel, PlanModel
 
 
 def index(request):
@@ -40,7 +41,7 @@ def index(request):
 
     url_short = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
     params_short = {'serviceKey': 'bWG0fEz3JXziaxVbvDmZy9L97AdOHLEF7FrSPGynfDVMsrYAFF5NjMWTgSnhS2I70i7ziWy6QWPMxdQ3eSlLFA==',
-              'pageNo': '1', 'numOfRows': '1000', 'dataType': 'JSON', 'base_date': 20220729, 'base_time': '0500',
+              'pageNo': '1', 'numOfRows': '1000', 'dataType': 'JSON', 'base_date': dt_short_aj, 'base_time': '0500',
               'nx': '53', 'ny': '38'}  # nx, ny : 제주도 일도동,이도동
 
     # tmFc에 현재 날짜 str로 더해서 넣기
@@ -78,7 +79,8 @@ def index(request):
 
 
 def result(request):
-    if request.method == "POST":
+    # datepicker가 있는 result.html 에서 넘어올때
+    if request.method == "POST" and request.POST.get('startdate') != None:
         startdate = request.POST.get('startdate')
         enddate = request.POST.get('enddate')
 
@@ -90,7 +92,16 @@ def result(request):
         request.session['enddate'] = enddate
         request.session['day'] = day
         request.session['where'] = where
-
+    # map.html에서 장소를 추가하고 day.html로 넘어올 때
+    elif request.method == "POST" and request.POST.get('startdate') == None:
+        # result.html에서 session으로 넘긴 값
+        startdate = request.session['startdate']
+        enddate = request.session['enddate']
+        day = request.session['day']
+        where = request.session['where']
+        # map.html에서 넘겨받은 json 값 출력
+        json_object = json.loads(request.body)
+        print(json_object)
     else:
         startdate = request.session['startdate']
         enddate = request.session['enddate']
