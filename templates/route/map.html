@@ -241,6 +241,7 @@
           "place_address":"제주특별자치도 제주시 특별자치도, 중앙로 215",
           "latitude":"126.53133413314706",  // 위도
           "longtitude":"33.49963223009168",  //경도
+          "count": window.localStorage.getItem('count')
         }
         $.ajax({
           url:"{% url 'route:result'%}",

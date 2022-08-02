@@ -27,6 +27,7 @@ class PlaceModel(models.Model):
     place_address = models.CharField(max_length=150)
     latitude = models.CharField(max_length=50)
     longtitude = models.CharField(max_length=50)
+    count = models.IntegerField("count")
 
     plan_pk = models.ForeignKey(PlanModel, null=True, blank=True, on_delete=models.SET_NULL)
     username = models.ForeignKey(User, null=True, on_delete=models.CASCADE)

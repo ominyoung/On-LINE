@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 from .forms import MemoForm, PlanForm
-from .models import MemoModel, PlanModel
+from .models import MemoModel, PlanModel, PlaceModel
 
 
 def index(request):
@@ -90,7 +90,7 @@ def result(request):
         # 세션 값 설정하기
         request.session['startdate'] = startdate
         request.session['enddate'] = enddate
-        request.session['day'] = day
+        request.session['day'] = day   # datepicker로 넘긴 기간
         request.session['where'] = where
     # map.html에서 장소를 추가하고 day.html로 넘어올 때
     elif request.method == "POST" and request.POST.get('startdate') == None:
@@ -101,6 +101,15 @@ def result(request):
         where = request.session['where']
         # map.html에서 넘겨받은 json 값 출력
         json_object = json.loads(request.body)
+        place_save = PlaceModel(
+            place_name=json_object["place_name"],
+            place_address=json_object["place_address"],
+            latitude=json_object["latitude"],
+            longtitude=json_object["longtitude"],
+            username=request.user,
+            count=int(json_object["count"]),
+        )
+        place_save.save()
         print(json_object)
     else:
         startdate = request.session['startdate']
@@ -110,14 +119,16 @@ def result(request):
 
     # 일전에 임시로 저장해놓은 메모 불러오기
     memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
-
+    # 일전에 임시로 저장해놓은 장소 불러오기
+    place_list = PlaceModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
     return render(request, 'route/day.html',
                   {
                       'startdate': startdate,
                       'enddate': enddate,
                       'where': where,
                       'days': range(day),  # 일정기간
-                      'memo_lists': memo_list
+                      'memo_lists': memo_list,
+                      'place_lists': place_list,
                   })
 
 # 메모 저장
@@ -140,6 +151,7 @@ def map(request):
 # 일정페이지에서 close를 누를때 임시저장되었던 메모 삭제
 def schedule_del(request):
     MemoModel.objects.filter(plan_pk=None).delete()
+    PlaceModel.objects.filter(plan_pk=None).delete()
     return redirect('accounts:hello_world')
 
 
@@ -156,6 +168,9 @@ def schedule_save(request):
             # memo 테이블에 plan_pk 칼럼이 none이였는데, 새로운 plan으로 update
             memo_list = MemoModel.objects.filter(plan_pk=None)
             memo_list.update(plan_pk=lastest_plan)
+            # place 테이블에 plan_pk 칼럼이 none이였는데, 새로운 plan으로 update
+            place_list = PlaceModel.objects.filter(plan_pk=None)
+            place_list.update(plan_pk=lastest_plan)
 
     return redirect('accounts:hello_world')
     #return render(request, 'accounts/main.html')
@@ -168,6 +183,7 @@ def custom(request):
 
 def spot(request):
     return render(request, 'route/spot.html')
+
 
 # 스팟페이지 상세
 def detail_spot(request):

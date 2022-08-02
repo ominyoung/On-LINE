@@ -13,6 +13,7 @@
   <!--<h6> 해당 날짜 </h6>-->
   <table class="table table-hover table-dark">
     <tbody>
+    <!-- 메모리스트 -->
     {% for j in memo_lists %}
       {% if i|add:"1" == j.count %}
         <tr>
@@ -26,11 +27,26 @@
         </tr>
       {% endif %}
     {% endfor %}
+
+    <!-- 장소리스트 -->
+    {% for k in place_lists %}
+      {% if i|add:"1" == k.count %}
+        <tr>
+          <th scope="row">{{k.place_name}}</th>
+          <td>{{k.place_address}}</td>
+          <td>{{k.plan_pk.username}}</td>
+          <td>
+            <button type="button" class="btn btn-primary">수정</button>
+            <button type="button" class="btn btn btn-danger">삭제</button>
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
      </tbody>
   </table>
   <div class="btn-group btn-group-justified" role="group" aria-label="...">
     <div class="btn-group" role="group">
-      <a href="{% url 'route:map' %}"><button type="button" class="btn btn-default">장소 추가</button></a>
+      <a href="{% url 'route:map' %}"><button type="button" value="{{ i|add:'1' }}" class="placeBtn btn btn-default">장소 추가</button></a>
     </div>
 
     <div class="btn-group" role="group">
@@ -59,7 +75,12 @@
    day = $(this).attr("id");
    window.localStorage.setItem('day',day);
   });
-
+  // 장소 추가 버튼을 누를 때 Day 부분이 ajax로 넘기기 위한 코드, 넘긴 후 db에 저장
+  // 단, datepicker 로 설정한 날짜도 변수 이름이 day여서 place table db column 명인 count로 전달
+  $('.placeBtn').click(function(){
+   count = $(this).attr("value");
+   window.localStorage.setItem('count',count);
+  });
 
 
 </script>
