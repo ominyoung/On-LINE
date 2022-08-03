@@ -14,13 +14,18 @@
 
   <div class="modal-body">
     <div class="form-group">
-      DAY<input type="text" class="form-control" id="count" name="count" class="count">
+
+      {% if picked_memo != none %}
+        <input type="hidden" class="form-control" id="id" name="id" value="{{picked_memo.id}}">
+      {% endif %}
+
+      DAY<input type="text" class="form-control" id="count" name="count" class="count" value="{{picked_memo.count}}">
       <label for="title">제목</label>
-      <input type="text" class="form-control" id="title" name="title" class="title">
+      <input type="text" class="form-control" id="title" name="title" class="title" value="{{picked_memo.title}}">
     </div>
     <div class="form-group">
       <label for="content">내용</label>
-      <textarea class="form-control" id="content" name="content" rows="3" class="content"></textarea>
+      <textarea class="form-control" id="content" name="content" rows="3" class="content">{{picked_memo.content}}</textarea>
     </div>
   </div>
   <div class="modal-footer">
@@ -32,10 +37,19 @@
 <script>
   day = window.localStorage.getItem('day');
 
-  document.getElementById('count').value = day
+  if (day != null){
+    document.getElementById('count').value = day;
+
+    localStorage.removeItem('day');
+  }
   // document.getElementById('count').disable = true 하면 오류나서 수정함
   // day 값은 보이되 수정은 못하도록 함
-  document.getElementById('count').readOnly = true
+  document.getElementById('count').readOnly = true;
+
+
+
+
+
 </script>
 
 {% endblock %}

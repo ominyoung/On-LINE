@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from .forms import MemoForm, PlanForm
 from .models import MemoModel, PlanModel, PlaceModel
 
-
+# 기상청 api 호출, date-picker로 날짜 넘김
 def index(request):
     # 기상청 중기 api
     # 현재 날짜 시간을 0600, 1800만 받아올수 있음 예시) 202207190600
@@ -131,21 +131,57 @@ def result(request):
                       'place_lists': place_list,
                   })
 
-# 메모 저장
+
+# 일정페이지 메모추가버튼 클릭시
 def memo(request):
     if request.method == 'POST':
         form = MemoForm(request.POST)
+        # 폼 유효성 검사
         if form.is_valid():
-            post = form.save(commit=False)
-            post.username = request.user
-            post.save()
+            # 메모의 id(pk)가 이미 존재하면 update, 아니면 create
+            # update
+            if 'id' in request.POST.keys():
+                update_memo = MemoModel.objects.filter(pk=request.POST["id"])
+                update_memo.update(
+                    title=request.POST["title"],
+                    content=request.POST["content"],
+                )
+            # create
+            else:
+                post = form.save(commit=False)
+                post.username = request.user
+                post.save()
             return redirect('route:result')
-    else:
-        form = MemoForm()
-    return render(request, 'route/memo_form.html', {'form': form})
+    #else:
+    #    form = MemoForm()
+    return render(request, 'route/memo_form.html',
+                  #{'form': form}
+                  )
 
+
+# 일정페이지 장소추가버튼 클릭시
 def map(request):
     return render(request, 'route/map.html')
+
+
+# 일정페이지 저장된 메모 수정버튼 클릭시
+def memo_update(request, pk):
+    picked_memo = MemoModel.objects.get(id=pk)
+    return render(request, 'route/memo_form.html', {'picked_memo': picked_memo})
+
+
+# 일정페이지 저장된 메모 삭제버튼 클릭시
+def memo_delete(request, pk):
+    picked_memo = MemoModel.objects.get(id=pk)
+    picked_memo.delete()
+    return redirect('route:result')
+
+
+# 일정페이지 저장된 장소 삭제버튼 클릭시
+def map_delete(request, pk):
+    picked_place = PlaceModel.objects.get(id=pk)
+    picked_place.delete()
+    return redirect('route:result')
 
 
 # 일정페이지에서 close를 누를때 임시저장되었던 메모 삭제
