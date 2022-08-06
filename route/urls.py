@@ -15,6 +15,7 @@ urlpatterns = [
     path('memo_update/<int:pk>', views.memo_update, name='memo_update'),
     path('memo_delete/<int:pk>', views.memo_delete, name='memo_delete'),
     path('map_delete/<int:pk>', views.map_delete, name='map_delete'),
+    path('map_update/<int:pk>', views.map_update, name='map_update'),
 
     # 맞춤형 페이지
     path('custom/', views.custom, name='custom'),

@@ -36,7 +36,7 @@
           <td>{{k.place_address}}</td>
           <td>{{k.plan_pk.username}}</td>
           <td>
-            <button type="button" class="btn btn-primary">수정</button>
+            <a href="{% url 'route:map_update' k.id %}"><button type="button" class="btn btn-primary">수정</button></a>
             <a href="{% url 'route:map_delete' k.id %}"><button type="button" class="btn btn btn-danger">삭제</button></a>
           </td>
         </tr>

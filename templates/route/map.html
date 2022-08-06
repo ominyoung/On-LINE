@@ -212,7 +212,7 @@
         </li>
       </ul>
     </div>
-
+    <input type="hidden" id="pk" name="pk" value="{{pk}}">
     <script type="text/javascript">
       function receive_get_data(param) {
         var result = null,
@@ -236,8 +236,8 @@
       function add(place) {
         //json 으로 보내는 코드
         var object1 = JSON.parse(place); // JSON 형식의 string을 JSON으로 바꿈
-        console.log(object1)
         var parameters = {
+          "id": document.getElementById("pk").value, // 수정시 해당 장소 저장 pk 접근을 위해
           "place_name":object1.place_name,
           "place_address":object1.address_name,
           "latitude":object1.x,  // 위도

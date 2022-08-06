@@ -109,7 +109,17 @@ def result(request):
             username=request.user,
             count=int(json_object["count"]),
         )
-        place_save.save()
+        json_pk = json_object["id"]
+        if json_pk is not None:
+            update_place = PlaceModel.objects.filter(id=json_pk)
+            update_place.update(
+                place_name=json_object["place_name"],
+                place_address=json_object["place_address"],
+                latitude=json_object["latitude"],
+                longtitude=json_object["longtitude"],
+            )
+        else:
+            place_save.save()
         print(json_object)
     else:
         startdate = request.session['startdate']
@@ -159,11 +169,6 @@ def memo(request):
                   )
 
 
-# 일정페이지 장소추가버튼 클릭시
-def map(request):
-    return render(request, 'route/map.html')
-
-
 # 일정페이지 저장된 메모 수정버튼 클릭시
 def memo_update(request, pk):
     picked_memo = MemoModel.objects.get(id=pk)
@@ -175,6 +180,16 @@ def memo_delete(request, pk):
     picked_memo = MemoModel.objects.get(id=pk)
     picked_memo.delete()
     return redirect('route:result')
+
+
+# 일정페이지 장소추가버튼 클릭시
+def map(request):
+    return render(request, 'route/map.html')
+
+
+# 일정페이지 저장된 장소 수정버튼 클릭시
+def map_update(request, pk):
+    return render(request, 'route/map.html', {'pk': pk})
 
 
 # 일정페이지 저장된 장소 삭제버튼 클릭시
