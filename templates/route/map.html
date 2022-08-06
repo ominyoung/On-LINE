@@ -233,14 +233,15 @@
         location.href = "https://map.kakao.com/link/to/" + dst_id;
         window.open(location.href);
       }
-      function add() {
+      function add(place) {
         //json 으로 보내는 코드
-        //json 장소 하드코딩
+        var object1 = JSON.parse(place); // JSON 형식의 string을 JSON으로 바꿈
+        console.log(object1)
         var parameters = {
-          "place_name":"스타벅스 제주시청점",
-          "place_address":"제주특별자치도 제주시 특별자치도, 중앙로 215",
-          "latitude":"126.53133413314706",  // 위도
-          "longtitude":"33.49963223009168",  //경도
+          "place_name":object1.place_name,
+          "place_address":object1.address_name,
+          "latitude":object1.x,  // 위도
+          "longtitude":object1.y,  //경도
           "count": window.localStorage.getItem('count')
         }
         $.ajax({
@@ -452,14 +453,18 @@
           "</span>" +
           "</div>" +
           '<div class="after"></div>' +
-          '<button onclick="add()" id="btn-add">' +
+          '<button id="btn-add">' +
           "추가" +
           '</button>';
-
 
           contentNode.innerHTML = content;
           placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
           placeOverlay.setMap(map);
+
+          // 추가 버튼 클릭했을때 event
+          document.getElementById("btn-add").addEventListener("click",function(){
+            add(JSON.stringify(place));
+          }, false);
       }
 
 
