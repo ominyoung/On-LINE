@@ -110,7 +110,8 @@ def result(request):
             count=int(json_object["count"]),
         )
         json_pk = json_object["id"]
-        if json_pk is not None:
+        if json_pk:
+            json_pk = int(json_pk)
             update_place = PlaceModel.objects.filter(id=json_pk)
             update_place.update(
                 place_name=json_object["place_name"],
