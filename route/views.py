@@ -1,15 +1,16 @@
 from datetime import datetime
 
 import requests
+import json
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from .forms import ResultForm, MemoForm, PlanForm
-from .models import ResultModel, MemoModel, PlanModel
+from .forms import MemoForm, PlanForm
+from .models import MemoModel, PlanModel, PlaceModel
 
-
+# 기상청 api 호출, date-picker로 날짜 넘김
 def index(request):
     # 기상청 중기 api
     # 현재 날짜 시간을 0600, 1800만 받아올수 있음 예시) 202207190600
@@ -50,9 +51,10 @@ def index(request):
 
     sky = []
     pty = []
-    sky_dict = {}
-    pty_dict = {}
+
     for i in items:
+        sky_dict = {}
+        pty_dict = {}
         if i["category"] == "SKY":
             if i["fcstTime"] == '0600' or i["fcstTime"] == "1200" or i["fcstTime"] == "1800":
                 datestring = datetime.strptime(i["fcstDate"], "%Y%m%d")
@@ -62,8 +64,8 @@ def index(request):
                 sky.append(sky_dict)
         if i["category"] == "PTY":
             if i["fcstTime"] == '0600' or i["fcstTime"] == "1200" or i["fcstTime"] == "1800":
-                pty_dict["fcstDate"] = i["fcstDate"]
-                pty_dict["fcstTime"] = i["fcstTime"]
+                #pty_dict["fcstDate"] = i["fcstDate"]
+                #pty_dict["fcstTime"] = i["fcstTime"]
                 pty_dict["fcstValue"] = i["fcstValue"]
                 pty.append(pty_dict)
 
@@ -77,7 +79,8 @@ def index(request):
 
 
 def result(request):
-    if request.method == "POST":
+    # datepicker가 있는 result.html 에서 넘어올때
+    if request.method == "POST" and request.POST.get('startdate') != None:
         startdate = request.POST.get('startdate')
         enddate = request.POST.get('enddate')
 
@@ -87,9 +90,38 @@ def result(request):
         # 세션 값 설정하기
         request.session['startdate'] = startdate
         request.session['enddate'] = enddate
-        request.session['day'] = day
+        request.session['day'] = day   # datepicker로 넘긴 기간
         request.session['where'] = where
-
+    # map.html에서 장소를 추가하고 day.html로 넘어올 때
+    elif request.method == "POST" and request.POST.get('startdate') == None:
+        # result.html에서 session으로 넘긴 값
+        startdate = request.session['startdate']
+        enddate = request.session['enddate']
+        day = request.session['day']
+        where = request.session['where']
+        # map.html에서 넘겨받은 json 값 출력
+        json_object = json.loads(request.body)
+        place_save = PlaceModel(
+            place_name=json_object["place_name"],
+            place_address=json_object["place_address"],
+            latitude=json_object["latitude"],
+            longtitude=json_object["longtitude"],
+            username=request.user,
+            count=int(json_object["count"]),
+        )
+        json_pk = json_object["id"]
+        if json_pk:
+            json_pk = int(json_pk)
+            update_place = PlaceModel.objects.filter(id=json_pk)
+            update_place.update(
+                place_name=json_object["place_name"],
+                place_address=json_object["place_address"],
+                latitude=json_object["latitude"],
+                longtitude=json_object["longtitude"],
+            )
+        else:
+            place_save.save()
+        print(json_object)
     else:
         startdate = request.session['startdate']
         enddate = request.session['enddate']
@@ -98,36 +130,80 @@ def result(request):
 
     # 일전에 임시로 저장해놓은 메모 불러오기
     memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
-
+    # 일전에 임시로 저장해놓은 장소 불러오기
+    place_list = PlaceModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
     return render(request, 'route/day.html',
                   {
                       'startdate': startdate,
                       'enddate': enddate,
                       'where': where,
                       'days': range(day),  # 일정기간
-                      'memo_lists': memo_list
+                      'memo_lists': memo_list,
+                      'place_lists': place_list,
                   })
 
-# 메모 저장
+
+# 일정페이지 메모추가버튼 클릭시
 def memo(request):
     if request.method == 'POST':
         form = MemoForm(request.POST)
+        # 폼 유효성 검사
         if form.is_valid():
-            post = form.save(commit=False)
-            post.username = request.user
-            post.save()
+            # 메모의 id(pk)가 이미 존재하면 update, 아니면 create
+            # update
+            if 'id' in request.POST.keys():
+                update_memo = MemoModel.objects.filter(pk=request.POST["id"])
+                update_memo.update(
+                    title=request.POST["title"],
+                    content=request.POST["content"],
+                )
+            # create
+            else:
+                post = form.save(commit=False)
+                post.username = request.user
+                post.save()
             return redirect('route:result')
-    else:
-        form = MemoForm()
-    return render(request, 'route/memo_form.html', {'form': form})
+    #else:
+    #    form = MemoForm()
+    return render(request, 'route/memo_form.html',
+                  #{'form': form}
+                  )
 
+
+# 일정페이지 저장된 메모 수정버튼 클릭시
+def memo_update(request, pk):
+    picked_memo = MemoModel.objects.get(id=pk)
+    return render(request, 'route/memo_form.html', {'picked_memo': picked_memo})
+
+
+# 일정페이지 저장된 메모 삭제버튼 클릭시
+def memo_delete(request, pk):
+    picked_memo = MemoModel.objects.get(id=pk)
+    picked_memo.delete()
+    return redirect('route:result')
+
+
+# 일정페이지 장소추가버튼 클릭시
 def map(request):
     return render(request, 'route/map.html')
+
+
+# 일정페이지 저장된 장소 수정버튼 클릭시
+def map_update(request, pk):
+    return render(request, 'route/map.html', {'pk': pk})
+
+
+# 일정페이지 저장된 장소 삭제버튼 클릭시
+def map_delete(request, pk):
+    picked_place = PlaceModel.objects.get(id=pk)
+    picked_place.delete()
+    return redirect('route:result')
 
 
 # 일정페이지에서 close를 누를때 임시저장되었던 메모 삭제
 def schedule_del(request):
     MemoModel.objects.filter(plan_pk=None).delete()
+    PlaceModel.objects.filter(plan_pk=None).delete()
     return redirect('accounts:hello_world')
 
 
@@ -144,6 +220,9 @@ def schedule_save(request):
             # memo 테이블에 plan_pk 칼럼이 none이였는데, 새로운 plan으로 update
             memo_list = MemoModel.objects.filter(plan_pk=None)
             memo_list.update(plan_pk=lastest_plan)
+            # place 테이블에 plan_pk 칼럼이 none이였는데, 새로운 plan으로 update
+            place_list = PlaceModel.objects.filter(plan_pk=None)
+            place_list.update(plan_pk=lastest_plan)
 
     return redirect('accounts:hello_world')
     #return render(request, 'accounts/main.html')
@@ -156,3 +235,8 @@ def custom(request):
 
 def spot(request):
     return render(request, 'route/spot.html')
+
+
+# 스팟페이지 상세
+def detail_spot(request):
+    return render(request, 'route/detail_spot.html')

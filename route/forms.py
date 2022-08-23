@@ -1,6 +1,6 @@
 from django import forms
 
-from route.models import ResultModel, MemoModel, PlanModel
+from route.models import MemoModel, PlanModel
 
 
 class PlanForm(forms.ModelForm):
@@ -9,15 +9,6 @@ class PlanForm(forms.ModelForm):
     class Meta:
         model = PlanModel
         fields = ("username", )
-
-
-class ResultForm(forms.ModelForm):
-    day = forms.IntegerField()  # 여행 기간, 의미상 date가 가까움
-    where = forms.CharField()
-
-    class Meta:
-        model = ResultModel
-        fields = ("day", "where")
 
 
 class MemoForm(forms.ModelForm):

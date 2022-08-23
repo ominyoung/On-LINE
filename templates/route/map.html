@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <title>목적지 정보</title>
+    <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
     </style>
@@ -211,7 +212,7 @@
         </li>
       </ul>
     </div>
-
+    <input type="hidden" id="pk" name="pk" value="{{pk}}">
     <script type="text/javascript">
       function receive_get_data(param) {
         var result = null,
@@ -232,8 +233,30 @@
         location.href = "https://map.kakao.com/link/to/" + dst_id;
         window.open(location.href);
       }
-      function add() {
+      function add(place) {
         //json 으로 보내는 코드
+        var object1 = JSON.parse(place); // JSON 형식의 string을 JSON으로 바꿈
+        var parameters = {
+          "id": document.getElementById("pk").value, // 수정시 해당 장소 저장 pk 접근을 위해
+          "place_name":object1.place_name,
+          "place_address":object1.address_name,
+          "latitude":object1.x,  // 위도
+          "longtitude":object1.y,  //경도
+          "count": window.localStorage.getItem('count')
+        }
+        $.ajax({
+          url:"{% url 'route:result'%}",
+          type:"POST",
+          headers: {
+            'X-CSRFTOKEN' : '{{csrf_token}}'
+          },
+          data: JSON.stringify(parameters),
+          success:function(data){
+            let url = '{% url 'route:result'%}';
+            location.replace(url);
+            console.log(parameters);
+          }
+        });
       }
     </script>
      <script
@@ -430,14 +453,18 @@
           "</span>" +
           "</div>" +
           '<div class="after"></div>' +
-          '<button onclick="add()" id="btn-add">' +
+          '<button id="btn-add">' +
           "추가" +
           '</button>';
-
 
           contentNode.innerHTML = content;
           placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
           placeOverlay.setMap(map);
+
+          // 추가 버튼 클릭했을때 event
+          document.getElementById("btn-add").addEventListener("click",function(){
+            add(JSON.stringify(place));
+          }, false);
       }
 
 
