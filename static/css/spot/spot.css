@@ -58,7 +58,7 @@
 }
 
 .card_content {
-  padding: 1rem;
+  padding: 1rem; /*이거 바꾼다 원래는 1임*/
   background: black;
 }
 
