@@ -1,10 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>스팟페이지</title>
-</head>
+{% extends 'base.html' %}
+{% block content %}
+
 <body>
-    <h1>스팟</h1>
+<div class="main">
+  <br>
+  <h1>만족도가 높은 BEST 장소들</h1>
+  <ul class="cards">
+    <li class="cards_item">
+      <div class="card">
+        <!--<div class="card_image">--><img src="../../static/img/돌산.jpg"><!--</div>-->
+        <div class="card_content">
+          <h2 class="card_title">강화도</h2>
+          <p class="card_text">강화도ㅗ도도</p>
+          <button class="btn card_btn" onclick="location.href='https://www.naver.com/';">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="cards_item">
+      <div class="card">
+        <!--<div class="card_image">--><img src="../../static/img/돌산.jpg"><!--</div>-->
+        <div class="card_content">
+          <h2 class="card_title">인천</h2>
+          <p class="card_text">인천너ㅓ넌</p>
+          <button class="btn card_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="cards_item">
+      <div class="card">
+        <!--<div class="card_image">--><img src="../../static/img/돌산.jpg"><!--</div>-->
+        <div class="card_content">
+          <h2 class="card_title">부산</h2>
+          <p class="card_text">부사나사ㅏㅏ</p>
+          <button class="btn card_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div><br><br><br>
+
+<!--테마 부분-->
+<div class="h1_name">
+  <p>관리자 추천 장소</p>
+</div>
+<div>
+  <div class="images-instagram">
+    <div class="images-row">
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2D9/image/aThO4ETW8IzdLtC5p1CXP_oAhls.jpg">
+        </a>
+          <div class="title">라일락 공원</div>
+        <p>#셀카스팟#힐링#노쇼핑 </p>
+      </div>
+
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+        <img src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2AuX/image/CrqsEbZlwhto5B4RzBX7CBBramc.jpg">
+        </a>
+          <div class="title">어디 호수</div>
+        <p>#낚시스팟#체험#태양 </p>
+      </div>
+    </div>
+
+    <div class="images-row">
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2AuX/image/5EFCipGGNNr_p2CFQBaaxNSd8fU.jpg">
+        </a>
+          <div class="title">그리스</div>
+        <p>#압도적인#관광장소#동화 </p>
+      </div>
+
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="../../static/img/돌산.jpg">
+        </a>
+        <div class="title">여수 돌산</div>
+        <p>#야경#야식#맥주#드라이브 </p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<!--맛집-->
+<div class="h1_name">
+  <p>맛있는 여행을!</p>
+</div>
+<div>
+  <div class="images-instagram">
+    <div class="images-row">
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2D9/image/aThO4ETW8IzdLtC5p1CXP_oAhls.jpg">
+        </a>
+          <div class="title">라일락 공원</div>
+        <p>#셀카스팟#힐링#노쇼핑 </p>
+      </div>
+
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+        <img src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2AuX/image/CrqsEbZlwhto5B4RzBX7CBBramc.jpg">
+        </a>
+          <div class="title">어디 호수</div>
+        <p>#낚시스팟#체험#태양 </p>
+      </div>
+    </div>
+
+    <div class="images-row">
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2AuX/image/5EFCipGGNNr_p2CFQBaaxNSd8fU.jpg">
+        </a>
+          <div class="title">그리스</div>
+        <p>#압도적인#관광장소#동화 </p>
+      </div>
+
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="../../static/img/돌산.jpg">
+        </a>
+        <div class="title">여수 돌산</div>
+        <p>#야경#야식#맥주#드라이브 </p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<!--sns 테마 사진-->
+<div class="h1_name">
+  <p>인생사진 명소</p>
+</div>
+<div>
+  <div class="images-instagram">
+    <div class="images-row">
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2D9/image/aThO4ETW8IzdLtC5p1CXP_oAhls.jpg">
+        </a>
+          <div class="title">라일락 공원</div>
+        <p>#셀카스팟#힐링#노쇼핑 </p>
+      </div>
+
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+        <img src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2AuX/image/CrqsEbZlwhto5B4RzBX7CBBramc.jpg">
+        </a>
+          <div class="title">어디 호수</div>
+        <p>#낚시스팟#체험#태양 </p>
+      </div>
+    </div>
+
+    <div class="images-row">
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2AuX/image/5EFCipGGNNr_p2CFQBaaxNSd8fU.jpg">
+        </a>
+          <div class="title">그리스</div>
+        <p>#압도적인#관광장소#동화 </p>
+      </div>
+
+      <div class="image-instagram-container">
+        <a href="https://www.naver.com/">
+          <img src="../../static/img/돌산.jpg">
+        </a>
+        <div class="title">여수 돌산</div>
+        <p>#야경#야식#맥주#드라이브 </p>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
-</html>
+{% endblock%}

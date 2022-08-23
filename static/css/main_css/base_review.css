@@ -4,22 +4,28 @@
    margin-bottom:15%;
  }*/
 
+
 .container{
   margin: auto;
   max-width:1200px;
   padding: 0 20px;
   justify-content:space-between;
 }
-
+/*맞춤형 페이지 배경색*/
 .back{
      background-color:#F5E1E1;
      height:720px;
 }
 
-.page3{
+.rev_back{
  background-color:#f5f5f5;
-  width:100%;
 }
+
+.rev_back2{
+ background-color:white;
+}
+
+
 .page3-box{
   display:flex;
   flex-wrap:wrap;
@@ -35,7 +41,7 @@
 flex:1;
   padding-left:70px;
 }
-button.learn-more{
+.button.learn-more{
   background-color:#292b2c;
   color:white;
 }
@@ -47,7 +53,8 @@ button.learn-more{
 
 .info-title2{
   font-size:20px;
-/*  font-weight:bold;*/
+  font-weight:bold;
+
 
 }
 .info-all{
@@ -58,61 +65,9 @@ button.learn-more{
 
 }
 
+*/
 /*span{
   font-size:40px;
 
 }*/
-.under{
-  background-color:#f5f5f5;
-  padding:10px;
-  display:flex;
 
-
-}
- .under .container{
-   display:flex;
-   flex-wrap:wrap;
-   justify-content:space-between;
-   width:100%;
-  }
-
-.facebook{
-  background-image:url("https://i.ibb.co/x6n6DNV/facebook-logo-button.png");
-  background-repeat:no-repeat;
-  background-size:cover;
-  width:30px;
-  height:30px;
-
-}
-.sos-med{
-  display:flex;
-  justify-content:space-between;
-  width:100px;
-}
-
-
-.twitter{
-   background-image:url("https://i.ibb.co/wzstzsd/twitter.png");
-   background-repeat:no-repeat;
-  background-size:cover;
-  width:30px;
-  height:30px;
-}
-.linkedin{
-  background-image:url("https://i.ibb.co/9T8kqqb/linkedin-logo-button.png");
-  background-repeat:no-repeat;
-  background-size:cover;
-  width:30px;
-  height:30px;
-}
-
-
-@media (max-width: 840px) {
-  .information {
-    padding-left: 0;
-    text-align: center;
-  }
-  .page3-box {
-    justify-content: center;
-  }
-}
