@@ -1,0 +1,53 @@
+.foot_color{
+  background-color:#FBFBFB;
+  padding:10px;
+  display:flex;
+
+}
+ .under .container{
+   display:flex;
+   flex-wrap:wrap;
+   justify-content:space-between;
+   width:100%;
+  }
+
+.facebook{
+  background-image:url("https://i.ibb.co/x6n6DNV/facebook-logo-button.png");
+  background-repeat:no-repeat;
+  background-size:cover;
+  width:30px;
+  height:30px;
+
+}
+.sos-med{
+  display:flex;
+  justify-content:space-between;
+  width:100px;
+}
+
+
+.twitter{
+   background-image:url("https://i.ibb.co/wzstzsd/twitter.png");
+   background-repeat:no-repeat;
+  background-size:cover;
+  width:30px;
+  height:30px;
+}
+.linkedin{
+  background-image:url("https://i.ibb.co/9T8kqqb/linkedin-logo-button.png");
+  background-repeat:no-repeat;
+  background-size:cover;
+  width:30px;
+  height:30px;
+}
+
+
+@media (max-width: 840px) {
+  .information {
+    padding-left: 0;
+    text-align: center;
+  }
+  .page3-box {
+    justify-content: center;
+  }
+}

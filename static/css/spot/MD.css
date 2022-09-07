@@ -1,0 +1,47 @@
+.images-instagram {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.images-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.images-instagram .image-instagram-container {
+  padding: 1rem;
+}
+
+.images-instagram img {
+  max-width: 350px; /*이미지 크기*/
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .images-instagram {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .images-row {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.title{
+  font-size: 1.3rem;
+    color: balck;
+
+}
+
+.h1_name{
+   margin-left:5%;
+  font-size: 2rem;
+  font-weight:bold;
+   color: black; /*지워야함*/
+}

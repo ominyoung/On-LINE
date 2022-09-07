@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="body">
+<br>
+<h1 class="title_name">나의 여행 일기</h1>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<!--검색 바-->
+<br><br>
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="검색어를 입력하세요.">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+<br><br>
+<!--리뷰 리스트-->
+<table id="list">
+  <tr>
+      <th scope="col">N0</th>
+      <th scope="col">장소</th>
+      <th scope="col">제목</th>
+      <th scope="col">작성자</th>
+      <th scope="col">등록일</th>
+  </tr>
+  <tr>
+    <td>1</td>
+     <td>한강</td>
+    <td onClick="location.href='{% url 'route:view' %}'">이런 여행이라면 언제라도 또 다시...</td></a>
+    <td>루라</td>
+    <td>2022-02-01</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>한강</td>
+    <td>코로나에서 해방되어 제주도여행을 다녀오다!</td>
+    <td>루라</td>
+    <td>2022-02-01</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>한강</td>
+    <td>너무너무 재밌는 경험을 소개해볼게요!!!!</td>
+    <td>루라</td>
+    <td>2022-02-01</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>한강</td>
+    <td>너무너무 재밌는 경험을 소개해볼게요!!!!</td>
+    <td>루라</td>
+    <td>2022-02-01</td>
+  </tr>
+</table>
+
+    <a href="{% url 'route:write' %}"> <button class="review_button">글 등록</button></a>
+</div>
+<br>
+{% endblock%}

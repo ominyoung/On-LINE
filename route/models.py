@@ -34,3 +34,15 @@ class PlaceModel(models.Model):
 
     def __str__(self):
         return f'[{self.pk}] :: {self.place_name}'
+
+# 나의 여행 일기
+class ReviewModel(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='author_review')
+    published_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    # 사진
+    photo = models.ImageField(blank=True, null=True)
+    # 추천수
+    voter = models.ManyToManyField(User, related_name='voter_review')
