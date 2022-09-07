@@ -240,3 +240,13 @@ def spot(request):
 # 스팟페이지 상세
 def detail_spot(request):
     return render(request, 'route/detail_spot.html')
+
+# 리뷰페이지
+def review(request):
+    return render(request, 'route/review.html')
+
+def view(request):
+    return render(request, 'route/view.html')
+
+def write(request):
+    return render(request, 'route/write.html')

@@ -23,4 +23,9 @@ urlpatterns = [
     # 스팟 페이지
     path('spot/', views.spot, name='spot'),
     path('detail_spot/', views.detail_spot, name='detail_spot'),
+
+    # 리뷰페이지
+    path('review/', views.review, name='review'),
+    path('view/', views.view, name='view'),
+    path('write/', views.write, name='write'),
 ]
