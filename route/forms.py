@@ -1,6 +1,6 @@
 from django import forms
 
-from route.models import MemoModel, PlanModel
+from route.models import MemoModel, PlanModel, ReviewModel
 
 
 class PlanForm(forms.ModelForm):
@@ -19,3 +19,8 @@ class MemoForm(forms.ModelForm):
     class Meta:
         model = MemoModel
         fields = ("title", "content", "count")
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = ReviewModel
+        fields = '__all__'

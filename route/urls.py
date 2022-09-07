@@ -2,6 +2,9 @@ from django.urls import path
 
 from route import views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 app_name = "route"
 
 urlpatterns = [
@@ -29,3 +32,4 @@ urlpatterns = [
     path('view/', views.view, name='view'),
     path('write/', views.write, name='write'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

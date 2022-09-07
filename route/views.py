@@ -2,13 +2,15 @@ from datetime import datetime
 
 import requests
 import json
+
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from .forms import MemoForm, PlanForm
-from .models import MemoModel, PlanModel, PlaceModel
+from .forms import MemoForm, PlanForm, ReviewForm
+from .models import MemoModel, PlanModel, PlaceModel, ReviewModel
 
 # 기상청 api 호출, date-picker로 날짜 넘김
 def index(request):
@@ -245,8 +247,23 @@ def detail_spot(request):
 def review(request):
     return render(request, 'route/review.html')
 
+# 리뷰페이지 등록된 글 세부
 def view(request):
     return render(request, 'route/view.html')
 
+# 리뷰페이지 글등록
 def write(request):
-    return render(request, 'route/write.html')
+    if request.method == 'POST':
+        data = {
+            'title': request.POST.get('title'),
+            'author': User.objects.get(username=request.POST.get('author')),
+            'photo': request.FILES.get('photo'),
+            'content': request.POST.get('content'),
+        }
+        new_review = ReviewModel.objects.create(**data)
+
+        return redirect('route:review')
+    context = {
+        'form': ReviewForm()
+    }
+    return render(request, 'route/write.html', context)
