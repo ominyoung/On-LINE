@@ -10,7 +10,7 @@
         <tr>
             <th scope="row">{{i}}</th>
             <th class="text-right" scope="row">
-                <button type="button" class="btn btn-primary">자세히보기</button>
+                <a href="{% url 'accounts:personal_detail' i.pk %}"><button type="button" class="btn btn-primary">자세히보기</button></a>
                 <button type="button" class="btn btn btn-danger">삭제</button>
             </th>
         </tr>

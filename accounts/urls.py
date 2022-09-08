@@ -2,7 +2,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 from accounts.views import hello_world, AccountCreateView, ProfileCreateView, AccountDetailView, AccountUpdateView, \
-    ProfileUpdateView, personal
+    ProfileUpdateView, personal, personal_detail
 
 app_name = "accounts"
 
@@ -20,4 +20,5 @@ urlpatterns = [
     path('profile/update/<int:pk>', ProfileUpdateView.as_view(), name='profile_update'),
 
     path('pers_route/', personal, name='personal'),
+    path('pers_route/<int:pk>', personal_detail, name='personal_detail'),
 ]
