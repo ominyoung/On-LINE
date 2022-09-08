@@ -10,6 +10,7 @@ body {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
+	object-fit: cover;
 }
 
 #slider #line {

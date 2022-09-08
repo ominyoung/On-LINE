@@ -25,6 +25,15 @@ urlpatterns = [
 
     # 스팟 페이지
     path('spot/', views.spot, name='spot'),
+
+    #리뷰 페이지
+    path('review/', views.review, name='review'),
+
+    #리부 글 쓰기 페이지
+    path('write/', views.write, name='write'),
+
+    # 리부 글 보기 페이지
+    path('view/', views.view, name='view'),
     path('detail_spot/', views.detail_spot, name='detail_spot'),
 
     # 리뷰페이지
