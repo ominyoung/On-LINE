@@ -9,28 +9,61 @@
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=458b106d0504311f70b03b0655ff3041&libraries=services">
 </script>
 {% for i in pers_place %}
-    {{i}}
+{{i}}
+{% endfor %}
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng({{pers_place.0.longtitude}}, {{pers_place.0.latitude}}), // 지도의 중심좌표
+        level: 9 // 지도의 확대 레벨
+    };
 
-    <script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new kakao.maps.LatLng({{i.longtitude}}, {{i.latitude}}), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    // 마커가 표시될 위치입니다
+    var positions = [];
+    {% for i in pers_place %}
 
-        // 마커가 표시될 위치입니다
-        var markerPosition  = new kakao.maps.LatLng({{i.longtitude}}, {{i.latitude}});
+    positions.push({
+    "content":'<div>{{forloop.counter}} :: {{i.place_name}}</div>',
+    "latlng": new kakao.maps.LatLng({{i.longtitude}}, {{i.latitude}}),
+    })
+    //positions[{{forloop.counter}}]={{i.longtitude}};
 
+    {% endfor %}
+    console.log(positions);
+
+    for (var i = 0; i < positions.length; i ++) {
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
-            position: markerPosition
+            map: map, // 마커를 표시할 지도
+            position: positions[i].latlng, // 마커를 표시할 위치
         });
+        // 마터에 표시할 인포인도우를 생성합니다.
+        var infowindow = new kakao.maps.InfoWindow({
+            content:positions[i].content
+        });
+        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+        // 이벤트 리스너로는 클로저를 만들어 등록합니다
+        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-    </script>
-{% endfor %}
+    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+    function makeOverListener(map, marker, infowindow) {
+        return function() {
+            infowindow.open(map, marker);
+        };
+    }
+
+    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+    function makeOutListener(infowindow) {
+        return function() {
+            infowindow.close();
+        };
+    }
+</script>
+
 </body>
 {% endblock %}
