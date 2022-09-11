@@ -14,8 +14,8 @@
                 </div><!--titile 끝-->
                 <div class="info">
                     <dl>
-                        <dt>장소</dt>
-                        <dd><input type="text" placeholder="장소 입력"></dd>
+                        <dt>테마</dt>
+                        <dd><input type="text" placeholder="테마 입력"></dd>
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
@@ -48,8 +48,8 @@
     </div>
             </div>
             <div class="bt_wrap"><!--버튼 시작-->
-                <a href="{% url 'route:view' %}" class="on">등록</a>
-                <a href="{% url 'route:review' %}">취소</a>
+                <a href="{% url 'route:view' %}"><button class="on">등록</button></a><!--버튼으로 바꿈-->
+                <a href="{% url 'route:review' %}"><button class="on">취소</button></a>
             </div> <!--버튼 끝-->
         </div>
     </div>

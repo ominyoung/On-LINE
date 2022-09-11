@@ -234,19 +234,9 @@ def schedule_save(request):
 def custom(request):
     return render(request, 'route/CustomPage.html')
 
-
+#스팟 페이지
 def spot(request):
     return render(request, 'route/spot.html')
-
-def review(request):
-    return render(request, 'route/review.html')
-
-def write(request):
-    return render(request, 'route/write.html')
-
-def view(request):
-    return render(request, 'route/view.html')
-
 
 # 스팟페이지 상세
 def detail_spot(request):
