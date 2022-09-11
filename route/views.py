@@ -133,7 +133,7 @@ def result(request):
     # 일전에 임시로 저장해놓은 메모 불러오기
     memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
     # 일전에 임시로 저장해놓은 장소 불러오기
-    place_list = PlaceModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
+    place_list = PlaceModel.objects.filter(Q(plan_pk=None) & Q(username=request.user)).order_by('count')
     return render(request, 'route/day.html',
                   {
                       'startdate': startdate,
