@@ -10,7 +10,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 
 from accounts.forms import ProfileCreationForm
 from accounts.models import Profile
-from route.models import PlanModel, PlaceModel
+from route.models import PlanModel, PlaceModel, MemoModel
 
 
 def hello_world(request):
@@ -72,8 +72,10 @@ def personal(request):
 # 개인 일정 > 자세히 보기 페이지
 def personal_detail(request, pk):
     pers_place_detail = PlaceModel.objects.filter(plan_pk=pk)
+    pers_memo_detail = MemoModel.objects.filter(plan_pk=pk)
     context = {
         'pk': pk,
         'pers_place': pers_place_detail,
+        'pers_memo': pers_memo_detail,
     }
     return render(request, 'route/personal_route_detail.html', context)

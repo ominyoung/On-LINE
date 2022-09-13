@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 <body>
-{{pk}}
 
 <div id="map" style="width:100%;height:350px;"></div>
 <script
     type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=458b106d0504311f70b03b0655ff3041&libraries=services">
 </script>
-{% for i in pers_place %}
-{{i}}
-{% endfor %}
+<div class="container">
+    <h2> 장소 모아보기 </h2>
+    {% for i in pers_place %}
+    {{i.place_name}} :: {{i.place_address}} :: DAY{{i.count}}
+    {% endfor %}
+
+    {% if pers_memo %}
+    <hr>
+    <h2> 메모 모아보기 </h2>
+    {% endif %}
+    {% for j in pers_memo %}
+    {{j.title}} :: {{j.content}} :: DAY{{j.count}}
+    {% endfor %}
+</div>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
@@ -62,6 +72,49 @@
         return function() {
             infowindow.close();
         };
+    }
+
+    // 마커끼리의 선을 긋습니다.
+    var linePath;
+    var lineLine = new kakao.maps.Polyline();
+    var distance;
+
+    for (var i = 0; i < positions.length; i++) {
+        if (i != 0) {
+            linePath = [ positions[i - 1].latlng, positions[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+        }
+        ;
+        lineLine.setPath(linePath); // 선을 그릴 라인을 세팅합니다
+
+        var drawLine = new kakao.maps.Polyline({
+            map : map, // 선을 표시할 지도입니다
+            path : linePath,
+            strokeWeight : 3, // 선의 두께입니다
+            strokeColor : '#db4040', // 선의 색깔입니다
+            strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            strokeStyle : 'solid' // 선의 스타일입니다
+        });
+
+        distance = Math.round(lineLine.getLength());
+        displayCircleDot(positions[i].latlng, distance);
+
+    }
+
+    function displayCircleDot(position, distance) {
+        if (distance > 0) {
+            // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+            var distanceOverlay = new kakao.maps.CustomOverlay(
+                    {
+                        content : '<div class="dotOverlay">거리 <span class="number">'
+                                + distance + '</span>m</div>',
+                        position : position,
+                        yAnchor : 1,
+                        zIndex : 2
+                    });
+
+            // 지도에 표시합니다
+            distanceOverlay.setMap(map);
+        }
     }
 </script>
 

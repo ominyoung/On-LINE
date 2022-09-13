@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['13.125.122.165']
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     # google 연동 로그인
     'django.contrib.sites',
     'allauth',
@@ -48,7 +47,6 @@ INSTALLED_APPS = [
     # APP
     'accounts',
     'route',
-    'rest_api',
 ]
 
 MIDDLEWARE = [
