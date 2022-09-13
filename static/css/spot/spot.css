@@ -6,8 +6,8 @@
     font-size: 24px;
     font-weight: 400;
 }
-
-.btn {
+/*맞춤형이랑 충돌*/
+.btn_spot {
   color: white;
   padding: 0.8rem;
   font-size: 14px;
@@ -21,7 +21,7 @@
   background: transparent;
 }
 
-.btn:hover {
+.btn_spot:hover {
   background-color: rgba(255, 255, 255, 0.12);
 }
 
@@ -37,11 +37,6 @@
   padding: 1rem;
 }
 
-/*@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}*/
 @media (min-width: 56rem) {
   .cards_item {
     width: 33.3333%;

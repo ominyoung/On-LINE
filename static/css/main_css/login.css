@@ -1,8 +1,9 @@
+/*
 body
 {
-  background-color: red;
+  background-color: black;
 }
-
+*/ /*모든 페이지 배경색 적용으로 주석 처리 함*/
 * {
   margin: 0;
   padding: 0;
