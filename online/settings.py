@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     # APP
     'accounts',
     'route',
-    'rest_api',
 ]
 
 MIDDLEWARE = [
