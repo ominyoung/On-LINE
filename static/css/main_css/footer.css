@@ -1,16 +1,31 @@
 .foot_color{
-  background-color:#FBFBFB;
   padding:10px;
   display:flex;
 
+
 }
- .under .container{
+ .foot_color .container{
    display:flex;
    flex-wrap:wrap;
    justify-content:space-between;
    width:100%;
   }
 
+.copy{
+ font-family: 'Work Sans', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  margin-right:15%;
+}
+/*footer 두번째 글자*/
+.tel{
+  text-align: left;
+}
+/*footer 마지막 글*/
+.cu{
+  font-size: 0.5rem;
+  text-align: left;
+}
 .facebook{
   background-image:url("https://i.ibb.co/x6n6DNV/facebook-logo-button.png");
   background-repeat:no-repeat;
@@ -40,7 +55,6 @@
   width:30px;
   height:30px;
 }
-
 
 @media (max-width: 840px) {
   .information {

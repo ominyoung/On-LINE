@@ -1,34 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div id="slider">
-	<div id="line">
-
-	</div>
-
-	<ul id="move">
-		<li><img src="../../static/img/경주.jpg" height="600" ></li>
-		<li><img src="../../static/img/돌산.jpg" height="600"></li>
-		<li><img src="../../static/img/부산.jpg" height="600"></li>
-		<li><img src="../../static/img/울산.jpg" height="600"></li>
-	</ul>
-	<div id="back">
-		<
-	</div>
-	<div id="forword">
-		>
-	</div>
-	<div id="dots">
-
-	</div>
+<!--메인 첫 자전거 이미지 -->
+<div>
+       <center> <img src="../../static/img/main_src.png"  height="550"> </center>
 
 </div>
-  <script  src="../../static/css/main_css/slider.js"></script><br>
 
 <!--2번쨰-->
-
+<br><br>
 <div class="place"><br><br>
-<h1>고객님을 위한 테마 추천!22</h1><br>
+    <h1 style="margin-left:5%;">고객님을 위한 테마 추천!</h1>
+    <h4 style="margin-left:5%;">사진을 클릭하시면 좋은 스팟을 찾을 수 있어요!</h4><br><br>
 <!-- partial:index.partial.html -->
 <div class="nt-homeunit container">
   <div class="nt-homeunit__list">
@@ -73,38 +56,23 @@
   <div class="info-title"> 본인의 여행 스타일 찾아보세요!! </div>
     <div class="info-title2"> 맞춤형 설문 조사 해보기 </div>
   <br>
-  <div class="info-all">고객님의 여행 스타일은 어떤가요? 혹시 본인의 여행 스타일을 잘 모르시겠나요?? 그렇다면! 맞춤형 추천 페이지에 들어가 본인의 여행 스타일을 찾아보세요! </div>
+  <div class="info-all">고객님의 여행 스타일은 어떤가요? 혹시 본인의 여행 스타일을 잘 모르시겠나요?? 그렇다면 맞춤형 추천 페이지에 들어가 본인의 여행 스타일을 찾아보세요! </div>
     <a href="{% url 'route:custom' %}"><button class="button learn-more">설문 조사 해보기</button></a>
       </div>
     </div>
   </div>
 </div>
-<br><br><br>
-<!--리뷰 1-->
-<div class="rev_back">
-  <div class="container">
-    <div class="page3-box">
-      <img class="page3-img" src="../../static/img/bike_page.png">
-<div class="information">
-  <div class="info-title"> 이디야 커피 </div>
-  <br>
-  <div class="info-all">처음 가봤는데 너무 재미있었어요!! 여기는 꼭 사진을 찍어야 합니다! 추천해요^^ <br>다양한 먹기로 입이 즐겁고 ,
-    볼거리로 눈이 즐거웠던 여행이였습니다. 이곳은 낮보다는 밤이 더 매력적이고 야경은 정말 말 할 필요도 없을 정도로 아름답습니다!  </div>
-    <a href="{% url 'route:review' %}"><button class="button learn-more">자세히 보기</button></a>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!--리뷰 2-->
 <div class="rev_back2">
   <div class="container">
     <div class="page3-box">
       <img class="page3-img" src="../../static/img/돌산.jpg">
 <div class="information">
-  <div class="info-title"> 아아아아아 </div>
+  <div class="info-title"> 여행후기 </div>
   <br>
-  <div class="info-all">Collect documents, signatures, application fees, class registrations, course evaluations, and quiz responses. </div>
-  <button class="button learn-more">Learn More</button>
+  <div class="info-all">OnLine의 도움을 받아 성공적인 여행을 다녀온 고객님들의 후기를 살펴보세요! </div>
+  <a href="{% url 'route:review' %}"><button class="button learn-more">자세히 보기</button></a>
       </div>
     </div>
   </div>

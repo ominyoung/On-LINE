@@ -14,15 +14,16 @@
 /*맞춤형 페이지 배경색*/
 .back{
      background-color:#F5E1E1;
-     height:720px;
+     padding: 8%;
 }
 
-.rev_back{
+/*.rev_back{
  background-color:#f5f5f5;
 }
-
+*/
 .rev_back2{
  background-color:white;
+ padding: 8%;
 }
 
 
@@ -30,16 +31,19 @@
   display:flex;
   flex-wrap:wrap;
   align-items:center;
-  padding: 100px 0;
+  padding: 20px 0;
+
+
 }
 .page3-img{
- max-width:540px;
- width:100%;
-
+ width:400px;
+ height: 400px;
+ border-radius: 70%;
+ overflow: hidden;
 }
 .information{
 flex:1;
-  padding-left:70px;
+  padding-left:13.5%;
 }
 .button.learn-more{
   background-color:#292b2c;
