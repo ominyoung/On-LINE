@@ -61,16 +61,17 @@
         <form action="{% url 'route:result' %}" method="post">
             {% csrf_token %}
             <div class="modal-body">
-                날짜 : <input autocomplete="off" type="text" id="startdate" name="startdate" />
-                ~
-                <input autocomplete="off" type="text" id="enddate" name="enddate" />
+                <h5>날짜 선택 : </h5>
+                <input autocomplete="off" type="text" id="startdate" name="startdate" style="float: left; width: 45%;"/>
+                &nbsp ~ &nbsp
+                <input autocomplete="off" type="text" id="enddate" name="enddate" style="float: right; width: 45%;"/>
             </div>
             <!--
             <input type="hidden" id="sendJSON" name="sendJSON" value="">
             -->
             <input type="hidden" id="day" name="day">
             <input type="hidden" id="where" name="where" value="제주여행">
-            <div class="modal-footer">
+            <div class="modal-footer" style="float: left; width: 100%;">
                 <button type="submit" class="btn btn-secondary" id="nxt">다음</button>
             </div>
         </form>
