@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+// 뒤로가기 막기
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+	history.go(1);
+	alert('현재 페이지를 벗어나려면 해당 일정을 저장 혹은 close 버튼을 눌러주세요');
+};
+</script>
 <div class="container">
   <br>
   <h3>{{ where }}</h3>
@@ -87,7 +95,6 @@
    count = $(this).attr("value");
    window.localStorage.setItem('count',count);
   });
-
 
 </script>
 <script
