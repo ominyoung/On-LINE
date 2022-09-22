@@ -64,7 +64,6 @@ class ProfileUpdateView(UpdateView):
 
 # 개인 일정 모음 페이지
 def personal(request):
-    print(f"현재 접속 user: {request.user}")
     pers_routes = PlanModel.objects.filter(username=request.user)
     return render(request, 'route/personal_route.html', {'pers_routes': pers_routes})
 
@@ -73,9 +72,11 @@ def personal(request):
 def personal_detail(request, pk):
     pers_place_detail = PlaceModel.objects.filter(plan_pk=pk)
     pers_memo_detail = MemoModel.objects.filter(plan_pk=pk)
+    pers_plan_detail = PlanModel.objects.filter(pk=pk)
     context = {
         'pk': pk,
         'pers_place': pers_place_detail,
         'pers_memo': pers_memo_detail,
+        'pers_plan': pers_plan_detail,
     }
     return render(request, 'route/personal_route_detail.html', context)

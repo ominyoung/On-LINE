@@ -5,6 +5,8 @@ from django.db import models
 # Create your models here.
 class PlanModel(models.Model):
     username = models.CharField(max_length=100)
+    startdate = models.DateField()
+    enddate = models.DateField()
 
     def __str__(self):
         return f'[{self.pk}] :: {self.username}'

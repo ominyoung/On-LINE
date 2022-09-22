@@ -5,10 +5,12 @@ from route.models import MemoModel, PlanModel, ReviewModel
 
 class PlanForm(forms.ModelForm):
     username = forms.CharField()
+    startdate = forms.DateField()
+    enddate = forms.DateField()
 
     class Meta:
         model = PlanModel
-        fields = ("username", )
+        fields = ("username", "startdate", "enddate")
 
 
 class MemoForm(forms.ModelForm):

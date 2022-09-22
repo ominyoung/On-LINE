@@ -1,25 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
 <body>
-
-<div id="map" style="width:100%;height:350px;"></div>
 <script
     type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=458b106d0504311f70b03b0655ff3041&libraries=services">
 </script>
+<br>
 <div class="container">
+
+    {% if pers_place %}
     <h2> 장소 모아보기 </h2>
+    <p style="color:gray;">{{pers_plan.0.startdate}} ~ {{pers_plan.0.enddate}}
+        일자로 저장한 내용입니다. </p>
+    <div id="map" style="width:100%;height:350px;"></div>
+    <table class="table text-center">
+        <th>DAY</th>
+        <th>장소</th>
+        <th>위치</th>
     {% for i in pers_place %}
-    {{i.place_name}} :: {{i.place_address}} :: DAY{{i.count}}
+        <tr>
+            <td>DAY {{i.count}}</td>
+            <td>{{i.place_name}}</td>
+            <td>{{i.place_address}}</td>
+        </tr>
     {% endfor %}
+    </table>
+    {% endif %}
 
     {% if pers_memo %}
     <hr>
+    <br>
     <h2> 메모 모아보기 </h2>
-    {% endif %}
+    <table class="table text-center">
+        <th>DAY</th>
+        <th>제목</th>
+        <th>내용</th>
     {% for j in pers_memo %}
-    {{j.title}} :: {{j.content}} :: DAY{{j.count}}
+        <tr>
+            <td>DAY {{j.count}}</td>
+            <td>{{j.title}}</td>
+            <td>{{j.content}}</td>
+        </tr>
     {% endfor %}
+    </table>
+    {% endif %}
 </div>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div

@@ -80,6 +80,8 @@ window.onpopstate = function(event) {
   <form action="{% url 'route:schedule_save' %}" method="post">
     {% csrf_token %}
     <input type="hidden" id="username" name="username" value="{{user}}">
+    <input type="hidden" id="startdate" name="startdate" value="{{startdate}}">
+    <input type="hidden" id="enddate" name="enddate" value="{{enddate}}">
     <button type="submit" class="btn btn-primary">저장</button>
   </form>
 </div>
