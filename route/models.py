@@ -37,11 +37,21 @@ class PlaceModel(models.Model):
     def __str__(self):
         return f'[{self.pk}] :: {self.place_name}'
 
+trip_style = [
+    ('A', '유명 관광지 탐방여행'),
+    ('B', 'SNS 핫 플레이스 탐방여행'),
+    ('C', '자연테라피 힐링여행'),
+    ('D', '액티비티 체험여행'),
+    ('E', '역사와 문화 여행'),
+    ('F', '맛있는 먹방 여행'),
+]
 # 나의 여행 일기
 class ReviewModel(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='author_review')
+    # 테마
+    theme = models.CharField(max_length=200, choices=trip_style, blank=True, null=True)
     published_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     # 사진

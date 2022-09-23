@@ -9,9 +9,9 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 # Create your views here.
-
 from .forms import MemoForm, PlanForm, ReviewForm
-from .models import MemoModel, PlanModel, PlaceModel, ReviewModel
+from .models import MemoModel, PlanModel, PlaceModel, ReviewModel, trip_style
+
 
 # 기상청 api 호출, date-picker로 날짜 넘김
 def index(request):
@@ -257,9 +257,11 @@ def view(request):
 # 리뷰페이지 글등록
 def write(request):
     if request.method == 'POST':
+        print(request.FILES)
         data = {
             'title': request.POST.get('title'),
             'author': User.objects.get(username=request.POST.get('author')),
+            'theme': request.POST.get('theme'),
             'photo': request.FILES.get('photo'),
             'content': request.POST.get('content'),
         }
@@ -267,6 +269,7 @@ def write(request):
 
         return redirect('route:review')
     context = {
-        'form': ReviewForm()
+        'form': ReviewForm(),
+        'trip_style': trip_style,
     }
     return render(request, 'route/write.html', context)
