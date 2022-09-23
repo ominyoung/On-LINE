@@ -210,7 +210,7 @@ def map_delete(request, pk):
 def schedule_del(request):
     MemoModel.objects.filter(plan_pk=None).delete()
     PlaceModel.objects.filter(plan_pk=None).delete()
-    return redirect('accounts:hello_world')
+    return redirect('main')
 
 
 # 일정페이지에서 저장을 누를때 임시저장되었던 메모 plan 테이블로 저장
@@ -230,7 +230,7 @@ def schedule_save(request):
             place_list = PlaceModel.objects.filter(plan_pk=None)
             place_list.update(plan_pk=lastest_plan)
 
-    return redirect('accounts:hello_world')
+    return redirect('main')
     #return render(request, 'accounts/main.html')
 
 

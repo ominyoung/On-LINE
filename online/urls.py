@@ -18,9 +18,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+import accounts.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', accounts.views.main, name='main'),
     path('accounts/', include('accounts.urls')),
     path('route/', include('route.urls')),
     path('accounts/', include('allauth.urls')),

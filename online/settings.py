@@ -142,8 +142,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = reverse_lazy('accounts:hello_world')
-LOGOUT_REDIRECT_URL = reverse_lazy('accounts:hello_world')
+LOGIN_REDIRECT_URL = reverse_lazy('main')
+LOGOUT_REDIRECT_URL = reverse_lazy('main')
 
 # 구글 연동
 # Required by allauth

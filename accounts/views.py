@@ -13,9 +13,9 @@ from accounts.models import Profile
 from route.models import PlanModel, PlaceModel, MemoModel
 
 
-def hello_world(request):
+def main(request):
     if request.method == "POST":
-        return HttpResponseRedirect(reverse('accounts:hello_word'))
+        return HttpResponseRedirect(reverse('main'))
     else:
         return render(request, 'accounts/main.html')
 
@@ -23,7 +23,7 @@ def hello_world(request):
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('accounts:hello_world')
+    success_url = reverse_lazy('main')
     template_name = 'accounts/signup.html'
 
 
@@ -36,7 +36,7 @@ class AccountDetailView(DetailView):
 class AccountUpdateView(UpdateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('accounts:hello_world')
+    success_url = reverse_lazy('main')
     template_name = 'profile/update.html'
 
 
@@ -44,7 +44,7 @@ class ProfileCreateView(CreateView):
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreationForm
-    success_url = reverse_lazy('accounts:hello_world')
+    success_url = reverse_lazy('main')
     template_name = 'profile/create.html'
 
     def form_valid(self, form):
@@ -58,7 +58,7 @@ class ProfileUpdateView(UpdateView):
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreationForm
-    success_url = reverse_lazy('accounts:hello_world')
+    success_url = reverse_lazy('main')
     template_name = 'profile/info_update.html'
 
 
