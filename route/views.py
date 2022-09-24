@@ -246,13 +246,23 @@ def spot(request):
 def detail_spot(request):
     return render(request, 'route/detail_spot.html')
 
+
 # 리뷰페이지
 def review(request):
-    return render(request, 'route/review.html')
+    reviews = ReviewModel.objects.all()
+    context = {
+        'reviews': reviews,
+        'trip_style': trip_style,
+    }
+    return render(request, 'route/review.html', context)
 
 # 리뷰페이지 등록된 글 세부
-def view(request):
-    return render(request, 'route/view.html')
+def view(request,pk):
+    view = ReviewModel.objects.get(id=pk)
+    context = {
+        'view': view
+    }
+    return render(request, 'route/view.html', context)
 
 # 리뷰페이지 글등록
 def write(request):

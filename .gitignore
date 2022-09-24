@@ -219,4 +219,6 @@ $RECYCLE.BIN/
 # 개인 설정
 my_settings.py
 
+# 사진
+media
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,python

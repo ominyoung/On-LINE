@@ -30,7 +30,7 @@ urlpatterns = [
 
     # 리뷰페이지 모음
     path('review/', views.review, name='review'), #리뷰 페이지
-    path('view/', views.view, name='view'), #리뷰 글 쓰기 페이지
+    path('view/<int:pk>', views.view, name='view'), #리뷰 글 쓰기 페이지
     path('write/', views.write, name='write'), #리뷰 글 보기 페이지
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
