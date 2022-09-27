@@ -36,6 +36,7 @@
                     <input type="file" name="photo" id="id_photo">
 
                     <div class="file-input multiple">
+                        <!-- 이 ui/ux는 사진을 여러장 첨부할때 필요 -->
                         <!--
                         <div class="file-input-wrapper">
                             <input type="file" name="photo" id="id_photo" >
@@ -47,7 +48,7 @@
                         <ul class="selected-files"></ul>
                         -->
                         <div class="bt_wrap"><!--버튼 시작-->
-                            <a href="{% url 'route:view' %}"><button class="on">등록</button></a><!--버튼으로 바꿈-->
+                            <a href="{% url 'route:review' %}"><button class="on">등록</button></a><!--버튼으로 바꿈-->
                             <a href="{% url 'route:review' %}"><button class="on">취소</button></a>
                         </div> <!--버튼 끝-->
                     </div>
