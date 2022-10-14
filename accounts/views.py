@@ -70,8 +70,8 @@ def personal(request):
 
 # 개인 일정 > 자세히 보기 페이지
 def personal_detail(request, pk):
-    pers_place_detail = PlaceModel.objects.filter(plan_pk=pk)
-    pers_memo_detail = MemoModel.objects.filter(plan_pk=pk)
+    pers_place_detail = PlaceModel.objects.filter(plan_pk=pk).order_by('count')
+    pers_memo_detail = MemoModel.objects.filter(plan_pk=pk).order_by('count')
     pers_plan_detail = PlanModel.objects.filter(pk=pk)
     context = {
         'pk': pk,
