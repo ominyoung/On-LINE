@@ -15,7 +15,7 @@ class PlanForm(forms.ModelForm):
 
 class MemoForm(forms.ModelForm):
     title = forms.CharField()
-    content = forms.CharField()
+    content = forms.CharField(required=False, empty_value='')
     count = forms.IntegerField()
 
     class Meta:

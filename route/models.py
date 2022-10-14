@@ -14,7 +14,7 @@ class PlanModel(models.Model):
 
 class MemoModel(models.Model):
     title = models.CharField(max_length=50)
-    content = models.CharField(max_length=100)
+    content = models.CharField(max_length=100, null=True)
     count = models.IntegerField("count")
 
     plan_pk = models.ForeignKey(PlanModel, null=True, blank=True, on_delete=models.SET_NULL)
