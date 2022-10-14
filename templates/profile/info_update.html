@@ -7,7 +7,9 @@
     </div>
     <form action="{% url 'accounts:profile_update' pk=target_profile.pk%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        {{ form.image }}<br>
+        닉네임: {{ form.nickname}}<br>
+        메세지: {{ form.message}}
         <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
     </form>
 </div>
