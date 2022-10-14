@@ -7,10 +7,10 @@
 
 <script>
     $(function () {
-    $("#startdate").datepicker({ dateFormat: "yy-mm-dd", minDate:0 });
+    $("#startdate").datepicker({ dateFormat: "yy-mm-dd", minDate:0, maxDate:14 });
     });
     $(function () {
-    $("#enddate").datepicker({ dateFormat: "yy-mm-dd", minDate:0 });
+    $("#enddate").datepicker({ dateFormat: "yy-mm-dd", minDate:0, maxDate:14 });
     });
 
     // 기상예보 단기 api 하늘상태(SKY) 코드
@@ -195,6 +195,11 @@ $('#nxt').on('click',function(){
     var enddate = new Date(arr2[0],arr2[1],arr2[2]);
 
     var diff = enddate-startdate
+    //enddate와 startdate를 반대로 기입했을때
+    if (diff < 0){
+        alert('계획 시작일과 마지막일이 반대로 기입되었습니다!');
+        return false;
+    }
     var currDay = 24 * 60 * 60 * 1000;
 
     document.getElementById("day").value = parseInt(diff/currDay) + 1;
