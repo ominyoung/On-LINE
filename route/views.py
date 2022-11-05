@@ -12,6 +12,8 @@ from django.http import Http404
 from .forms import MemoForm, PlanForm, ReviewForm
 from .models import MemoModel, PlanModel, PlaceModel, ReviewModel, trip_style
 
+from django.core.cache import cache
+
 
 # 기상청 api 호출, date-picker로 날짜 넘김
 def index(request):
@@ -73,13 +75,16 @@ def index(request):
                     pty_dict["fcstValue"] = i["fcstValue"]
                     pty.append(pty_dict)
 
+        weather = {
+            'time': dt_aj,  # 중기 api 날짜
+            'weather': response.json().get('response').get('body').get('items').get('item')[0],  # 중기 api 날짜
+            'sky': sky,  # 단기 api 날씨 [{날짜, 시간, 날씨}]
+            'pty': pty,  # 단기 api 날씨 [{날짜, 시간, 강수}]
+        }
+        weather = cache.set("weather", weather)
+        weather = cache.get("weather")
         # 3일뒤 오전 날씨
-        return render(request, 'route/result.html',
-                      {'time': dt_aj,    # 중기 api 날짜
-                       'weather': response.json().get('response').get('body').get('items').get('item')[0],  # 중기 api 날짜
-                       'sky': sky,       # 단기 api 날씨 [{날짜, 시간, 날씨}]
-                       'pty': pty,       # 단기 api 날씨 [{날짜, 시간, 강수}]
-                       })
+        return render(request, 'route/result.html', weather)
     except:
         raise Http404('페이지를 찾을 수 없습니다.새로고침을 시도해보십시오.')
 
@@ -138,15 +143,17 @@ def result(request):
     memo_list = MemoModel.objects.filter(Q(plan_pk=None) & Q(username=request.user))
     # 일전에 임시로 저장해놓은 장소 불러오기
     place_list = PlaceModel.objects.filter(Q(plan_pk=None) & Q(username=request.user)).order_by('count')
-    return render(request, 'route/day.html',
-                  {
-                      'startdate': startdate,
-                      'enddate': enddate,
-                      'where': where,
-                      'days': range(day),  # 일정기간
-                      'memo_lists': memo_list,
-                      'place_lists': place_list,
-                  })
+
+    result = {'startdate': startdate,
+            'enddate': enddate,
+            'where': where,
+            'days': range(day),  # 일정기간
+            'memo_lists': memo_list,
+            'place_lists': place_list,
+              }
+    result = cache.set("result", result)
+    result = cache.get("result")
+    return render(request, 'route/day.html', result)
 
 
 # 일정페이지 메모추가버튼 클릭시
@@ -254,6 +261,8 @@ def review(request):
         'reviews': reviews,
         'trip_style': trip_style,
     }
+    context = cache.set("context", context)
+    context = cache.get("context")
     return render(request, 'route/review.html', context)
 
 # 리뷰페이지 등록된 글 세부
@@ -278,8 +287,10 @@ def write(request):
         new_review = ReviewModel.objects.create(**data)
 
         return redirect('route:review')
-    context = {
+    write = {
         'form': ReviewForm(),
         'trip_style': trip_style,
     }
-    return render(request, 'route/write.html', context)
+    write = cache.set("write", write)
+    write = cache.get("write")
+    return render(request, 'route/write.html', write)

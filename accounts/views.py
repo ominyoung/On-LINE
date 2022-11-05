@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.core.cache import cache
 
 # Create your views here.
 from django.urls import reverse_lazy,reverse
@@ -73,10 +74,12 @@ def personal_detail(request, pk):
     pers_place_detail = PlaceModel.objects.filter(plan_pk=pk).order_by('count')
     pers_memo_detail = MemoModel.objects.filter(plan_pk=pk).order_by('count')
     pers_plan_detail = PlanModel.objects.filter(pk=pk)
-    context = {
+    pers_detail = {
         'pk': pk,
         'pers_place': pers_place_detail,
         'pers_memo': pers_memo_detail,
         'pers_plan': pers_plan_detail,
     }
-    return render(request, 'route/personal_route_detail.html', context)
+    pers_detail = cache.set("pers_detail", pers_detail)
+    pers_detail = cache.get("pers_detail")
+    return render(request, 'route/personal_route_detail.html', pers_detail)
