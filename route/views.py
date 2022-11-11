@@ -291,6 +291,4 @@ def write(request):
         'form': ReviewForm(),
         'trip_style': trip_style,
     }
-    write = cache.set("write", write)
-    write = cache.get("write")
     return render(request, 'route/write.html', write)

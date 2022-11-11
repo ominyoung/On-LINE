@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load route_tags %}
 <script>
 // 뒤로가기 막기
 history.pushState(null, null, location.href);
@@ -17,8 +18,17 @@ window.onpopstate = function(event) {
 <div class="container">
   <div id="map" style="width:100%;height:350px;"></div>
   {% for i in days %}
+
   <br>
   <h4> DAY <span id="count_html">{{ i|add:"1" }}</span> </h4>
+  {% route_date startdate days as today %}
+  <h6 style="color:gray">
+    {% for t in today %}
+      {% if i == forloop.counter0 %}
+        {{t}}
+      {% endif %}
+    {% endfor %}
+  </h6>
   <!--<h6> 해당 날짜 </h6>-->
   <table class="table table-hover table-dark">
     <tbody>
