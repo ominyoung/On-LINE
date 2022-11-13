@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <!-- Modal -->
-
+<script type="text/javascript">
+  function goBack(){
+    window.history.back();
+  }
+</script>
 <form action="{% url 'route:memo' %}" method="post">
   {% csrf_token %}
   <!--
@@ -29,7 +33,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="goBack();">Close</button>
     <button type="submit" class="btn btn-primary">저장</button>
   </div>
 
@@ -45,9 +49,6 @@
   // document.getElementById('count').disable = true 하면 오류나서 수정함
   // day 값은 보이되 수정은 못하도록 함
   document.getElementById('count').readOnly = true;
-
-
-
 
 
 </script>

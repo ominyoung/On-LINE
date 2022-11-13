@@ -8,6 +8,17 @@ window.onpopstate = function(event) {
 	history.go(1);
 	alert('현재 페이지를 벗어나려면 해당 일정을 저장 혹은 close 버튼을 눌러주세요');
 };
+// text를 링크로 설정
+window.onload = function(){
+    var inputText = document.getElementsByClassName("link");
+
+    for (var i =0;i<inputText.length;i++){
+      var originText = document.getElementsByClassName("link")[i].innerText.toString();
+      if(originText.includes('https://')||originText.includes('http://')||originText.includes('www.')){
+        inputText[i].innerHTML = '<a href="'+ originText +'" target="_blank">'+originText+'</a>';
+      }
+    }
+}
 </script>
 <div class="container">
   <br>
@@ -36,8 +47,8 @@ window.onpopstate = function(event) {
     {% for j in memo_lists %}
       {% if i|add:"1" == j.count %}
         <tr>
-          <th scope="row">{{j.title}}</th>
-          <td>{{j.content}}</td>
+          <th scope="row" class="link">{{j.title}}</th>
+          <td class="link">{{j.content}}</td>
           <td>{{j.plan_pk.username}}</td>
           <td>
             <a href="{% url 'route:memo_update' j.id %}"><button type="button" class="btn btn-primary">수정</button></a>
@@ -208,5 +219,7 @@ window.onpopstate = function(event) {
             distanceOverlay.setMap(map);
         }
     }
+
+
 </script>
 {% endblock %}
