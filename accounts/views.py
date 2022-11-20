@@ -51,8 +51,22 @@ class ProfileCreateView(CreateView):
     def form_valid(self, form):
         temp_profile = form.save(commit=False)
         temp_profile.user = self.request.user
+        # print(temp_profile)
         temp_profile.save()
         return super().form_valid(form)
+# def profile_create(request):
+#     if request.method == 'POST':
+#         data = {
+#             'user': User.objects.get(username=request.USER),
+#             'image': request.FILES.get('image'),
+#             'nickname': request.POST.get('nickname'),
+#             'message': request.POST.get('message'),
+#         }
+#         profile = Profile.objects.create(**data)
+#
+#         return render(request, 'profile/create.html', profile)
+#     else:
+#         return render(request, 'profile/create.html')
 
 
 class ProfileUpdateView(UpdateView):
@@ -80,6 +94,4 @@ def personal_detail(request, pk):
         'pers_memo': pers_memo_detail,
         'pers_plan': pers_plan_detail,
     }
-    pers_detail = cache.set("pers_detail", pers_detail)
-    pers_detail = cache.get("pers_detail")
     return render(request, 'route/personal_route_detail.html', pers_detail)

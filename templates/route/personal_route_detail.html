@@ -5,6 +5,19 @@
     type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=458b106d0504311f70b03b0655ff3041&libraries=services">
 </script>
+<script>
+// text를 링크로 설정
+window.onload = function(){
+    var inputText = document.getElementsByClassName("link");
+
+    for (var i =0;i<inputText.length;i++){
+      var originText = document.getElementsByClassName("link")[i].innerText.toString();
+      if(originText.includes('https://')||originText.includes('http://')||originText.includes('www.')){
+        inputText[i].innerHTML = '<a href="'+ originText +'" target="_blank">'+originText+'</a>';
+      }
+    }
+}
+</script>
 <br>
 <div class="container">
 
@@ -38,8 +51,8 @@
     {% for j in pers_memo %}
         <tr>
             <td>DAY {{j.count}}</td>
-            <td>{{j.title}}</td>
-            <td>{{j.content}}</td>
+            <td class="link">{{j.title}}</td>
+            <td class="link">{{j.content}}</td>
         </tr>
     {% endfor %}
     </table>
